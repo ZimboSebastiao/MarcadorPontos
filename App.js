@@ -9,7 +9,8 @@ export default function App() {
   /* State para monitorar dados da atualização atual do usuário.
   Inicialmente, nulo. */
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
-  const [dataFormatada, setDataFormatada] = useState(""); // Adicione esta linha
+  const [dataFormatada, setDataFormatada] = useState("");
+  const [data, setData] = useState("");
 
   useEffect(() => {
     async function obterLocalizacao() {
@@ -66,9 +67,11 @@ export default function App() {
 
     // const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
     const dataFormatada = `${horas}:${minutos}`;
+    const data = ` ${dia}/${mes}/${ano}`;
     console.log(dataFormatada);
     Alert.alert("Registro", `Ponto registrado com sucesso: ${dataFormatada}`);
     setDataFormatada(dataFormatada);
+    setData(data);
   };
 
   return (
@@ -83,6 +86,16 @@ export default function App() {
           >
             {localizacao && <Marker coordinate={localizacao} />}
           </MapView>
+        </View>
+
+        <View style={estilos.viewInfo}>
+          <Card style={estilos.cardInfo}>
+            <Card.Title title="Zimbo Sebastião" />
+            <Card.Content>
+              <Text variant="titleMedium">Segunda-Feira</Text>
+              <Text variant="titleMedium">{data}</Text>
+            </Card.Content>
+          </Card>
         </View>
 
         <View style={estilos.viewCard}>
@@ -162,5 +175,15 @@ const estilos = StyleSheet.create({
   },
   cardColor: {
     backgroundColor: "#F2F9FF",
+  },
+  viewInfo: {
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "6%",
+  },
+
+  cardInfo: {
+    backgroundColor: "#207FDE",
   },
 });
