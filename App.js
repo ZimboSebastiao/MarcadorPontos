@@ -12,6 +12,7 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
 import { Avatar, Button, Card, Text, ToggleButton } from "react-native-paper";
+import Gaveta from "./src/screens/Gaveta";
 
 export default function App() {
   /* State para monitorar dados da atualização atual do usuário.
@@ -109,7 +110,6 @@ export default function App() {
             </Card.Content>
           </Card>
         </View>
-
         <View style={estilos.viewCard}>
           <Card style={estilos.cardColor}>
             <Card.Content>
@@ -128,7 +128,6 @@ export default function App() {
             </Card.Content>
           </Card>
         </View>
-
         <View style={estilos.viewBotao}>
           <Button
             mode="elevated"
@@ -150,13 +149,8 @@ export default function App() {
             Relatório de Pontos
           </Button>
         </View>
-        <ToggleButton.Row
-          onValueChange={(value) => setValue(value)}
-          value={value}
-          style={estilos.modal}
-        >
-          <ToggleButton icon="chevron-up" value="left" />
-        </ToggleButton.Row>
+
+        <Gaveta />
       </ScrollView>
     </>
   );
@@ -207,5 +201,9 @@ const estilos = StyleSheet.create({
   },
   modal: {
     width: "100%",
+  },
+  gaveta: {
+    width: "100%",
+    borderRadius: 0,
   },
 });
