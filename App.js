@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Button,
-  Image,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Alert, Image, StatusBar, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
+import { Avatar, Button, Card, Text } from "react-native-paper";
 
 export default function App() {
   /* State para monitorar dados da atualização atual do usuário.
@@ -71,7 +64,8 @@ export default function App() {
     const horas = String(agora.getHours()).padStart(2, "0");
     const minutos = String(agora.getMinutes()).padStart(2, "0");
 
-    const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
+    // const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
+    const dataFormatada = `${horas}:${minutos}`;
     console.log(dataFormatada);
     Alert.alert("Registro", `Ponto registrado com sucesso: ${dataFormatada}`);
     setDataFormatada(dataFormatada);
@@ -81,7 +75,6 @@ export default function App() {
     <>
       <StatusBar />
       <View style={estilos.container}>
-        <View style={estilos.viewBotao}></View>
         <View style={estilos.viewMapa}>
           <MapView
             mapType="standard"
@@ -91,8 +84,47 @@ export default function App() {
             {localizacao && <Marker coordinate={localizacao} />}
           </MapView>
         </View>
-        <Button title="Marcar Ponto" onPress={marcarPonto} />
-        <Text>{dataFormatada}</Text>
+
+        <View style={estilos.viewCard}>
+          <Card style={estilos.cardColor}>
+            <Card.Content>
+              <Text variant="titleMedium">
+                Entrada: <Text>{dataFormatada}</Text>{" "}
+              </Text>
+              <Text variant="titleMedium">
+                Intervalo: <Text></Text>{" "}
+              </Text>
+              <Text variant="titleMedium">
+                Fim do Intervalo: <Text></Text>{" "}
+              </Text>
+              <Text variant="titleMedium">
+                Saída: <Text></Text>{" "}
+              </Text>
+            </Card.Content>
+          </Card>
+        </View>
+
+        <View style={estilos.viewBotao}>
+          <Button
+            mode="elevated"
+            buttonColor="#2864DE"
+            textColor="white"
+            onPress={marcarPonto}
+            icon="circle-outline"
+          >
+            Marcar Ponto
+          </Button>
+        </View>
+        <View style={estilos.viewRelatorio}>
+          <Button
+            mode="elevated"
+            buttonColor="white"
+            textColor="black"
+            icon="note-check-outline"
+          >
+            Relatório de Pontos
+          </Button>
+        </View>
       </View>
     </>
   );
@@ -109,5 +141,26 @@ const estilos = StyleSheet.create({
     marginRight: "auto",
 
     borderWidth: 2,
+  },
+  viewBotao: {
+    width: "70%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "6%",
+  },
+  viewRelatorio: {
+    width: "70%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "6%",
+  },
+  viewCard: {
+    width: "70%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "6%",
+  },
+  cardColor: {
+    backgroundColor: "#F2F9FF",
   },
 });
