@@ -16,18 +16,25 @@ export default function App() {
   /* State para monitorar dados da atualização atual do usuário.
   Inicialmente, nulo. */
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
+  const [dataFormatada, setDataFormatada] = useState(""); // Adicione esta linha
 
   useEffect(() => {
     async function obterLocalizacao() {
-      /* Acessando o status da requisição de permissão de uso
-      dos recursos de geolocalização. */
       const { status } = await Location.requestForegroundPermissionsAsync();
 
-      /* Se o status NÃO FOR liberado/permitido, então
-      será dado um alerta notificando o usuário. */
       if (status !== "granted") {
         Alert.alert("Ops!", "Você não autorizou o uso de geolocalização");
         return;
+      }
+
+      const { status: statusCalendario } =
+        await Calendar.requestCalendarPermissionsAsync();
+      if (statusCalendario === "granted") {
+        const calendars = await Calendar.getCalendarsAsync(
+          Calendar.EntityTypes.EVENT
+        );
+        console.log("Here are all your calendars:");
+        console.log({ calendars });
       }
 
       /* Se o status estiver OK, obtemos os dados da localização
@@ -46,9 +53,6 @@ export default function App() {
 
   console.log(minhaLocalizacao);
 
-  /* Este state tem a finalidade de determinar
-  a posição/localização no MapView junto com o Marker.
-  Inicialmente é nulo pois o usuário ainda não acionou o botão da sua localização. */
   const [localizacao, setLocalizacao] = useState(null);
 
   /* Coordenadas para o MapView */
@@ -59,7 +63,19 @@ export default function App() {
     longitudeDelta: 40,
   };
 
-  const marcarPonto = () => {};
+  const marcarPonto = () => {
+    const agora = new Date();
+    const dia = String(agora.getDate()).padStart(2, "0");
+    const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+    const ano = agora.getFullYear();
+    const horas = String(agora.getHours()).padStart(2, "0");
+    const minutos = String(agora.getMinutes()).padStart(2, "0");
+
+    const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
+    console.log(dataFormatada);
+    Alert.alert("Registro", `Ponto registrado com sucesso: ${dataFormatada}`);
+    setDataFormatada(dataFormatada);
+  };
 
   return (
     <>
@@ -76,6 +92,7 @@ export default function App() {
           </MapView>
         </View>
         <Button title="Marcar Ponto" onPress={marcarPonto} />
+        <Text>{dataFormatada}</Text>
       </View>
     </>
   );
