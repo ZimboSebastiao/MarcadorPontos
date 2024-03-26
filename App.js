@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Alert, Image, StatusBar, StyleSheet, View } from "react-native";
+import {
+  Alert,
+  Image,
+  StatusBar,
+  StyleSheet,
+  View,
+  ScrollView,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
@@ -77,17 +84,20 @@ export default function App() {
   return (
     <>
       <StatusBar />
-      <View style={estilos.container}>
-        <View style={estilos.viewMapa}>
-          <MapView
-            mapType="standard"
-            style={estilos.mapa}
-            region={localizacao ?? regiaoInicialMapa}
-          >
-            {localizacao && <Marker coordinate={localizacao} />}
-          </MapView>
-        </View>
 
+      <View style={estilos.viewMapa}>
+        <MapView
+          mapType="standard"
+          style={estilos.mapa}
+          region={localizacao ?? regiaoInicialMapa}
+        >
+          {localizacao && <Marker coordinate={localizacao} />}
+        </MapView>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={estilos.container}
+      >
         <View style={estilos.viewInfo}>
           <Card style={estilos.cardInfo}>
             <Card.Title title="Zimbo Sebastião" />
@@ -138,7 +148,7 @@ export default function App() {
             Relatório de Pontos
           </Button>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
