@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -10,7 +11,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
-import { Avatar, Button, Card, Text } from "react-native-paper";
+import { Avatar, Button, Card, Text, ToggleButton } from "react-native-paper";
 
 export default function App() {
   /* State para monitorar dados da atualização atual do usuário.
@@ -18,6 +19,7 @@ export default function App() {
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
   const [dataFormatada, setDataFormatada] = useState("");
   const [data, setData] = useState("");
+  const [value, setValue] = React.useState("left");
 
   useEffect(() => {
     async function obterLocalizacao() {
@@ -148,6 +150,13 @@ export default function App() {
             Relatório de Pontos
           </Button>
         </View>
+        <ToggleButton.Row
+          onValueChange={(value) => setValue(value)}
+          value={value}
+          style={estilos.modal}
+        >
+          <ToggleButton icon="chevron-up" value="left" />
+        </ToggleButton.Row>
       </ScrollView>
     </>
   );
@@ -195,5 +204,8 @@ const estilos = StyleSheet.create({
 
   cardInfo: {
     backgroundColor: "#207FDE",
+  },
+  modal: {
+    width: "100%",
   },
 });
