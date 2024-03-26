@@ -11,12 +11,12 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
-import { Avatar, Button, Card, Text, ToggleButton } from "react-native-paper";
+import { Avatar, Button, Card, Text } from "react-native-paper";
 import Gaveta from "./src/screens/Gaveta";
+import Tabar from "./src/screens/Tabar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
-  /* State para monitorar dados da atualização atual do usuário.
-  Inicialmente, nulo. */
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
   const [dataFormatada, setDataFormatada] = useState("");
   const [data, setData] = useState("");
@@ -87,71 +87,76 @@ export default function App() {
   return (
     <>
       <StatusBar />
-
-      <View style={estilos.viewMapa}>
-        <MapView
-          mapType="standard"
-          style={estilos.mapa}
-          region={localizacao ?? regiaoInicialMapa}
+      <SafeAreaProvider>
+        <View style={estilos.viewMapa}>
+          <MapView
+            mapType="standard"
+            style={estilos.mapa}
+            region={localizacao ?? regiaoInicialMapa}
+          >
+            {localizacao && <Marker coordinate={localizacao} />}
+          </MapView>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={estilos.container}
         >
-          {localizacao && <Marker coordinate={localizacao} />}
-        </MapView>
-      </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={estilos.container}
-      >
-        <View style={estilos.viewInfo}>
-          <Card style={estilos.cardInfo}>
-            <Card.Title title="Zimbo Sebastião" />
-            <Card.Content>
-              <Text variant="titleMedium">Segunda-Feira</Text>
-              <Text variant="titleMedium">{data}</Text>
-            </Card.Content>
-          </Card>
-        </View>
-        <View style={estilos.viewCard}>
-          <Card style={estilos.cardColor}>
-            <Card.Content>
-              <Text variant="titleMedium">
-                Entrada: <Text>{dataFormatada}</Text>{" "}
-              </Text>
-              <Text variant="titleMedium">
-                Intervalo: <Text></Text>{" "}
-              </Text>
-              <Text variant="titleMedium">
-                Fim do Intervalo: <Text></Text>{" "}
-              </Text>
-              <Text variant="titleMedium">
-                Saída: <Text></Text>{" "}
-              </Text>
-            </Card.Content>
-          </Card>
-        </View>
-        <View style={estilos.viewBotao}>
-          <Button
-            mode="elevated"
-            buttonColor="#2864DE"
-            textColor="white"
-            onPress={marcarPonto}
-            icon="circle-outline"
-          >
-            Marcar Ponto
-          </Button>
-        </View>
-        <View style={estilos.viewRelatorio}>
-          <Button
-            mode="elevated"
-            buttonColor="white"
-            textColor="black"
-            icon="note-check-outline"
-          >
-            Relatório de Pontos
-          </Button>
-        </View>
+          <View style={estilos.viewInfo}>
+            <Card style={estilos.cardInfo}>
+              <Card.Title title="Zimbo Sebastião" />
+              <Card.Content>
+                <Text variant="titleMedium">Segunda-Feira</Text>
+                <Text variant="titleMedium">{data}</Text>
+              </Card.Content>
+            </Card>
+          </View>
+          <View style={estilos.viewCard}>
+            <Tabar />
+            <Card style={estilos.cardColor}>
+              <Card.Content>
+                <View style={estilos.viewInfoHora}>
+                  <View>
+                    <Text variant="titleMedium">Entrada:</Text>
+                    <Text variant="titleMedium">Intervalo:</Text>
+                    <Text variant="titleMedium">Fim do Intervalo:</Text>
+                    <Text variant="titleMedium">Saída:</Text>
+                  </View>
 
-        <Gaveta />
-      </ScrollView>
+                  <View>
+                    <Text>{dataFormatada}</Text>
+                    <Text>12:00</Text>
+                    <Text>13:00</Text>
+                    <Text>--:--</Text>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          </View>
+          <View style={estilos.viewBotao}>
+            <Button
+              mode="elevated"
+              buttonColor="#2864DE"
+              textColor="white"
+              onPress={marcarPonto}
+              icon="circle-outline"
+            >
+              Marcar Ponto
+            </Button>
+          </View>
+          <View style={estilos.viewRelatorio}>
+            <Button
+              mode="elevated"
+              buttonColor="white"
+              textColor="black"
+              icon="note-check-outline"
+            >
+              Relatório de Pontos
+            </Button>
+          </View>
+
+          <Gaveta />
+        </ScrollView>
+      </SafeAreaProvider>
     </>
   );
 }
@@ -169,19 +174,19 @@ const estilos = StyleSheet.create({
     borderWidth: 2,
   },
   viewBotao: {
-    width: "70%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
   },
   viewRelatorio: {
-    width: "70%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
   },
   viewCard: {
-    width: "70%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
@@ -190,7 +195,7 @@ const estilos = StyleSheet.create({
     backgroundColor: "#F2F9FF",
   },
   viewInfo: {
-    width: "80%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
@@ -205,5 +210,10 @@ const estilos = StyleSheet.create({
   gaveta: {
     width: "100%",
     borderRadius: 0,
+  },
+  viewInfoHora: {
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
