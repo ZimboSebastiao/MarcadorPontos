@@ -1,26 +1,37 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Image,
-  StatusBar,
-  StyleSheet,
-  View,
-  ScrollView,
-} from "react-native";
+import { Alert, StatusBar, StyleSheet, View, ScrollView } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
-import { Avatar, Button, Card, Text } from "react-native-paper";
-import Gaveta from "./src/screens/Gaveta";
-import Tabar from "./src/screens/Tabar";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Card } from "react-native-paper";
+
+import {
+  GluestackUIProvider,
+  Text,
+  Box,
+  ActionsheetBackdrop,
+  ActionsheetDragIndicatorWrapper,
+  ActionsheetDragIndicator,
+  ActionsheetItem,
+  ActionsheetItemText,
+  Icon,
+  TrashIcon,
+  ChevronUpIcon,
+} from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
+import { Actionsheet } from "@gluestack-ui/themed";
+import { ButtonText } from "@gluestack-ui/themed";
+import { Button } from "@gluestack-ui/themed";
+import { ActionsheetContent } from "@gluestack-ui/themed";
 
 export default function App() {
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
   const [dataFormatada, setDataFormatada] = useState("");
   const [data, setData] = useState("");
-  const [value, setValue] = React.useState("left");
+
+  const [showActionsheet, setShowActionsheet] = React.useState(false);
+  const handleClose = () => setShowActionsheet(!showActionsheet);
 
   useEffect(() => {
     async function obterLocalizacao() {
@@ -37,8 +48,8 @@ export default function App() {
         const calendars = await Calendar.getCalendarsAsync(
           Calendar.EntityTypes.EVENT
         );
-        console.log("Here are all your calendars:");
-        console.log({ calendars });
+        // console.log("Here are all your calendars:");
+        // console.log({ calendars });
       }
 
       /* Se o status estiver OK, obtemos os dados da localização
@@ -55,11 +66,10 @@ export default function App() {
     obterLocalizacao();
   }, []);
 
-  console.log(minhaLocalizacao);
+  // console.log(minhaLocalizacao);
 
   const [localizacao, setLocalizacao] = useState(null);
 
-  /* Coordenadas para o MapView */
   const regiaoInicialMapa = {
     latitude: -23.533773,
     longitude: -46.65529,
@@ -78,7 +88,7 @@ export default function App() {
     // const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
     const dataFormatada = `${horas}:${minutos}`;
     const data = ` ${dia}/${mes}/${ano}`;
-    console.log(dataFormatada);
+    // console.log(dataFormatada);
     Alert.alert("Registro", `Ponto registrado com sucesso: ${dataFormatada}`);
     setDataFormatada(dataFormatada);
     setData(data);
@@ -87,23 +97,20 @@ export default function App() {
   return (
     <>
       <StatusBar />
-      <SafeAreaProvider>
-        <View style={estilos.viewMapa}>
-          <MapView
-            mapType="standard"
-            style={estilos.mapa}
-            region={localizacao ?? regiaoInicialMapa}
-          >
-            {localizacao && <Marker coordinate={localizacao} />}
-          </MapView>
-        </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={estilos.container}
-        >
+      <GluestackUIProvider config={config}>
+        {/* <View style={estilos.viewMapa}>
+              <MapView
+                mapType="standard"
+                style={estilos.mapa}
+                region={localizacao ?? regiaoInicialMapa}
+              >
+                {localizacao && <Marker coordinate={localizacao} />}
+              </MapView>
+            </View> */}
+        <View style={estilos.container}>
           <View style={estilos.viewInfo}>
             <Card style={estilos.cardInfo}>
-              <Card.Title title="Zimbo Sebastião" />
+              <Card.Title title="Zimbo ALbertina Sebastião" />
               <Card.Content>
                 <Text variant="titleMedium">Segunda-Feira</Text>
                 <Text variant="titleMedium">{data}</Text>
@@ -111,7 +118,6 @@ export default function App() {
             </Card>
           </View>
           <View style={estilos.viewCard}>
-            <Tabar />
             <Card style={estilos.cardColor}>
               <Card.Content>
                 <View style={estilos.viewInfoHora}>
@@ -133,36 +139,49 @@ export default function App() {
             </Card>
           </View>
           <View style={estilos.viewBotao}>
-            <Button
-              mode="elevated"
-              buttonColor="#2864DE"
-              textColor="white"
-              onPress={marcarPonto}
-              icon="circle-outline"
-            >
-              Marcar Ponto
+            <Button onPress={marcarPonto}>
+              <ButtonText>Marcar Ponto</ButtonText>
             </Button>
           </View>
           <View style={estilos.viewRelatorio}>
-            <Button
-              mode="elevated"
-              buttonColor="white"
-              textColor="black"
-              icon="note-check-outline"
-            >
-              Relatório de Pontos
+            <Button>
+              <ButtonText>Relatório de Pontos</ButtonText>
             </Button>
           </View>
 
-          <Gaveta />
-        </ScrollView>
-      </SafeAreaProvider>
+          <View>
+            <Button onPress={handleClose} style={estilos.modal}>
+              <Icon as={ChevronUpIcon} m="$2" w="$34" h="$35" />
+            </Button>
+            <Actionsheet
+              isOpen={showActionsheet}
+              onClose={handleClose}
+              zIndex={999}
+            >
+              <ActionsheetBackdrop />
+              <ActionsheetContent h="$72" zIndex={999}>
+                <ActionsheetDragIndicatorWrapper>
+                  <ActionsheetDragIndicator />
+                </ActionsheetDragIndicatorWrapper>
+                <Text>Banco de Horas</Text>
+                <Icon as={TrashIcon} />
+                <ActionsheetItem>
+                  <ActionsheetItemText>Início do banco</ActionsheetItemText>
+                </ActionsheetItem>
+                <ActionsheetItem>
+                  <ActionsheetItemText>Saldo consolidado</ActionsheetItemText>
+                </ActionsheetItem>
+              </ActionsheetContent>
+            </Actionsheet>
+          </View>
+        </View>
+      </GluestackUIProvider>
     </>
   );
 }
 
 const estilos = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, marginVertical: 40 },
   mapa: { width: "100%", height: "100%" },
   viewMapa: {
     width: "80%",
@@ -205,7 +224,10 @@ const estilos = StyleSheet.create({
     backgroundColor: "#207FDE",
   },
   modal: {
+    position: "relative",
     width: "100%",
+    backgroundColor: "#CBDAF0",
+    bottom: "-70%",
   },
   gaveta: {
     width: "100%",
