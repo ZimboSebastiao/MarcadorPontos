@@ -43,9 +43,9 @@ export default function App() {
   const [hora, setHora] = useState("");
   const [dataAtualizada, setDataAtualizada] = useState("");
   const [diaAtual, setDiaAtual] = useState("");
-  const [intervalo, setIntervalo] = useState(""); // Adicionado estado para intervalo
-  const [fimIntervalo, setFimIntervalo] = useState(""); // Adicionado estado para fim do intervalo
-  const [saida, setSaida] = useState(""); // Adicionado estado para saída
+  const [intervalo, setIntervalo] = useState("");
+  const [fimIntervalo, setFimIntervalo] = useState("");
+  const [saida, setSaida] = useState("");
 
   const drawer = useRef(null);
   const [drawerPosition, setDrawerPosition] = useState("left");
