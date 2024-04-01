@@ -13,9 +13,19 @@ import {
   CircleIcon,
   VStack,
   HStack,
-  AvatarBadge,
   AvatarImage,
   Heading,
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectIcon,
+  ChevronDownIcon,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicatorWrapper,
+  SelectDragIndicator,
+  SelectItem,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
@@ -43,10 +53,15 @@ export default function Relatorio({ navigation }) {
             </Avatar>
           </View>
 
-          <View>
+          <View style={estilos.imagem}>
             <VStack space="2xl">
-              <HStack space="md">
-                <Avatar>
+              <HStack
+                space="md"
+                h="34%"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Avatar size="2xl">
                   <AvatarFallbackText>SS</AvatarFallbackText>
                   <AvatarImage
                     source={{
@@ -61,6 +76,28 @@ export default function Relatorio({ navigation }) {
                 </VStack>
               </HStack>
             </VStack>
+          </View>
+
+          <View style={estilos.selecaoEspaco}>
+            <Select style={estilos.selecao}>
+              <SelectTrigger variant="rounded" size="sm" borderColor="blue">
+                <SelectInput placeholder="Seleciona um Período" />
+                <SelectIcon mr="$3">
+                  <Icon as={ChevronDownIcon} />
+                </SelectIcon>
+              </SelectTrigger>
+              <SelectPortal>
+                <SelectBackdrop />
+                <SelectContent>
+                  <SelectDragIndicatorWrapper>
+                    <SelectDragIndicator />
+                  </SelectDragIndicatorWrapper>
+                  <SelectItem label="UX Research" value="ux" />
+
+                  <SelectItem label="Backend Development" value="backend" />
+                </SelectContent>
+              </SelectPortal>
+            </Select>
           </View>
         </View>
       </GluestackUIProvider>
@@ -86,8 +123,23 @@ const estilos = StyleSheet.create({
   menuAvatar: {
     marginTop: 60,
   },
-  menuAvatarConteudo: { alignItems: "center" },
   menuNaveg: {
     alignItems: "flex-start",
+  },
+
+  imagem: {
+    justifyContent: "center",
+    alignItems: "center",
+
+    marginTop: 20,
+  },
+  selecao: {
+    justifyContent: "center",
+    width: "85%",
+    borderColor: "blue",
+  },
+  selecaoEspaco: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
