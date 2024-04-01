@@ -332,15 +332,23 @@ export default function App() {
 
             <View style={estilos.viewInfo}>
               <Card style={estilos.cardInfo}>
-                <Card.Title title="Zimbo ALbertina Sebastião" color="white" />
+                <Card.Title
+                  style={estilos.cardTexto}
+                  title="Zimbo Albertina Sebastião"
+                />
                 <Card.Content style={estilos.cardConteudo}>
                   <View>
-                    <Text variant="titleMedium">{diaAtual}</Text>
-                    <Text variant="titleMedium">{dataAtualizada}</Text>
+                    <Text style={estilos.cardTexto} variant="titleMedium">
+                      {diaAtual}
+                    </Text>
+                    <Text style={estilos.cardTexto} variant="titleMedium">
+                      {dataAtualizada}
+                    </Text>
                   </View>
-                  <View>
-                    <Text variant="titleMedium">
-                      <Icon as={ClockIcon} /> {hora}
+                  <View style={estilos.cardIcon}>
+                    <Icon as={ClockIcon} color="white" m="$0" w="$18" h="$6" />
+                    <Text style={estilos.cardTexto} variant="titleMedium">
+                      {hora}
                     </Text>
                   </View>
                 </Card.Content>
@@ -485,6 +493,8 @@ const estilos = StyleSheet.create({
   cardColor: {
     backgroundColor: "#f2f9ff",
   },
+  cardTexto: { color: "white" },
+  cardIcon: { flexDirection: "row" },
   viewInfo: {
     width: "90%",
     marginLeft: "auto",
@@ -505,6 +515,7 @@ const estilos = StyleSheet.create({
   cardConteudo: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   cardInfoText: {
     textAlign: "center",
