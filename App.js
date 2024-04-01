@@ -26,12 +26,15 @@ import {
   MenuIcon,
   Avatar,
   AvatarFallbackText,
+  SettingsIcon,
+  CloseCircleIcon,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
 import { ButtonText } from "@gluestack-ui/themed";
 import { Button } from "@gluestack-ui/themed";
 import { ActionsheetContent } from "@gluestack-ui/themed";
+import { FileText, LogOut } from "lucide-react-native";
 
 export default function App() {
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
@@ -65,10 +68,38 @@ export default function App() {
         <Text style={estilos.menuTexto}>Zimbo Sebastião</Text>
         <Text style={estilos.paragraph}>PontoFácil</Text>
       </View>
-      <Button
-        title="Close drawer"
-        onPress={() => drawer.current.closeDrawer()}
-      />
+      <View style={estilos.menuNaveg}>
+        <Button onPress={() => drawer.current.closeDrawer()}>
+          <ButtonText>
+            <Icon as={ClockIcon} color="#828282" m="$2" w="$18" h="$4" />
+            Ponto
+          </ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>
+            <FileText color="#828282" size={18} />
+            Relatórios
+          </ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>
+            <Icon as={SettingsIcon} color="#828282" m="$2" w="$18" h="$4" />
+            Configurações
+          </ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>
+            <Icon as={CloseCircleIcon} color="#828282" m="$2" w="$18" h="$4" />
+            Sobre
+          </ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>
+            <LogOut color="#828282" size={18} />
+            Sair
+          </ButtonText>
+        </Button>
+      </View>
     </View>
   );
 
@@ -172,15 +203,6 @@ export default function App() {
     <>
       <StatusBar />
       <GluestackUIProvider config={config}>
-        {/* <View style={estilos.viewMapa}>
-              <MapView
-              mapType="standard"
-              style={estilos.mapa}
-              region={localizacao ?? regiaoInicialMapa}
-              >
-              {localizacao && <Marker coordinate={localizacao} />}
-              </MapView>
-            </View> */}
         <DrawerLayoutAndroid
           ref={drawer}
           drawerWidth={300}
@@ -303,6 +325,10 @@ const estilos = StyleSheet.create({
     marginTop: 60,
   },
   menuAvatarConteudo: { alignItems: "center" },
+  menuNaveg: {
+    // justifyContent: "flex-end",
+    alignItems: "flex-start",
+  },
   mapa: { width: "100%", height: "100%" },
   viewMapa: {
     width: "80%",
