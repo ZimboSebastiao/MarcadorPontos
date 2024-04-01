@@ -43,6 +43,9 @@ export default function App() {
   const [hora, setHora] = useState("");
   const [dataAtualizada, setDataAtualizada] = useState("");
   const [diaAtual, setDiaAtual] = useState("");
+  const [intervalo, setIntervalo] = useState(""); // Adicionado estado para intervalo
+  const [fimIntervalo, setFimIntervalo] = useState(""); // Adicionado estado para fim do intervalo
+  const [saida, setSaida] = useState(""); // Adicionado estado para saída
 
   const drawer = useRef(null);
   const [drawerPosition, setDrawerPosition] = useState("left");
@@ -156,19 +159,118 @@ export default function App() {
 
   const marcarPonto = () => {
     const agora = new Date();
-    const dia = String(agora.getDate()).padStart(2, "0");
-    const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
-    const ano = agora.getFullYear();
     const horas = String(agora.getHours()).padStart(2, "0");
     const minutos = String(agora.getMinutes()).padStart(2, "0");
+    const horaAtual = `${horas}:${minutos}`;
 
-    // const dataFormatada = `${horas}:${minutos} - ${dia}/${mes}/${ano}`;
-    const dataFormatada = `${horas}:${minutos}`;
-    const data = ` ${dia}/${mes}/${ano}`;
-    // console.log(dataFormatada);
-    Alert.alert("Registro", `Ponto registrado com sucesso: ${dataFormatada}`);
-    setDataFormatada(dataFormatada);
-    setData(data);
+    if (!dataFormatada) {
+      const dia = String(agora.getDate()).padStart(2, "0");
+      const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+      const ano = agora.getFullYear();
+      const data = `${dia}/${mes}/${ano}`;
+
+      Alert.alert(
+        "Registro",
+        `Ponto de entrada marcado com sucesso: ${horaAtual} - ${data}`,
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              setDataFormatada(horaAtual);
+              setData(data);
+            },
+          },
+        ]
+      );
+    } else if (!intervalo) {
+      Alert.alert("Confirmação", "Tem certeza que deseja marcar o intervalo?", [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelado"),
+          style: "cancel",
+        },
+        {
+          text: "Confirmar",
+          onPress: () => {
+            const dia = String(agora.getDate()).padStart(2, "0");
+            const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+            const ano = agora.getFullYear();
+            const data = `${dia}/${mes}/${ano}`;
+
+            Alert.alert(
+              "Registro",
+              `Intervalo marcado com sucesso: ${horaAtual} - ${data}`,
+              [
+                {
+                  text: "OK",
+                  onPress: () => setIntervalo(horaAtual),
+                },
+              ]
+            );
+          },
+        },
+      ]);
+    } else if (!fimIntervalo) {
+      Alert.alert(
+        "Confirmação",
+        "Tem certeza que deseja marcar o fim do intervalo?",
+        [
+          {
+            text: "Cancelar",
+            onPress: () => console.log("Cancelado"),
+            style: "cancel",
+          },
+          {
+            text: "Confirmar",
+            onPress: () => {
+              const dia = String(agora.getDate()).padStart(2, "0");
+              const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+              const ano = agora.getFullYear();
+              const data = `${dia}/${mes}/${ano}`;
+
+              Alert.alert(
+                "Registro",
+                `Fim do intervalo marcado com sucesso: ${horaAtual} - ${data}`,
+                [
+                  {
+                    text: "OK",
+                    onPress: () => setFimIntervalo(horaAtual),
+                  },
+                ]
+              );
+            },
+          },
+        ]
+      );
+    } else {
+      Alert.alert("Confirmação", "Tem certeza que deseja marcar a saída?", [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancelado"),
+          style: "cancel",
+        },
+        {
+          text: "Confirmar",
+          onPress: () => {
+            const dia = String(agora.getDate()).padStart(2, "0");
+            const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+            const ano = agora.getFullYear();
+            const data = `${dia}/${mes}/${ano}`;
+
+            Alert.alert(
+              "Registro",
+              `Saída marcada com sucesso: ${horaAtual} - ${data}`,
+              [
+                {
+                  text: "OK",
+                  onPress: () => setSaida(horaAtual),
+                },
+              ]
+            );
+          },
+        },
+      ]);
+    }
   };
 
   const atualizarHora = () => {
@@ -249,17 +351,25 @@ export default function App() {
                 <Card.Content>
                   <View style={estilos.viewInfoHora}>
                     <View>
-                      <Text variant="titleMedium">Entrada:</Text>
-                      <Text variant="titleMedium">Intervalo:</Text>
-                      <Text variant="titleMedium">Fim do Intervalo:</Text>
-                      <Text variant="titleMedium">Saída:</Text>
+                      <Text style={estilos.texto} variant="titleMedium">
+                        Entrada:
+                      </Text>
+                      <Text style={estilos.texto} variant="titleMedium">
+                        Intervalo:
+                      </Text>
+                      <Text style={estilos.texto} variant="titleMedium">
+                        Fim do Intervalo:
+                      </Text>
+                      <Text style={estilos.texto} variant="titleMedium">
+                        Saída:
+                      </Text>
                     </View>
 
                     <View>
                       <Text>{dataFormatada}</Text>
-                      <Text>12:00</Text>
-                      <Text>13:00</Text>
-                      <Text>--:--</Text>
+                      <Text>{intervalo}</Text>
+                      <Text>{fimIntervalo}</Text>
+                      <Text>{saida}</Text>
                     </View>
                   </View>
                 </Card.Content>
@@ -381,6 +491,10 @@ const estilos = StyleSheet.create({
     marginRight: "auto",
     marginBottom: "6%",
     marginTop: "10%",
+  },
+  texto: {
+    fontWeight: "bold",
+    fontSize: 18,
   },
 
   cardInfo: {
