@@ -24,6 +24,8 @@ import {
   Icon,
   ClockIcon,
   MenuIcon,
+  Avatar,
+  AvatarFallbackText,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
@@ -51,7 +53,18 @@ export default function App() {
 
   const navigationView = () => (
     <View style={[estilos.container, estilos.navigationContainer]}>
-      <Text style={estilos.paragraph}>I'm in the Drawer!</Text>
+      <View style={estilos.menuAvatarConteudo}>
+        <Avatar
+          style={estilos.menuAvatar}
+          bgColor="$amber600"
+          size="xl"
+          borderRadius="$full"
+        >
+          <AvatarFallbackText>Zimbo Sebastião</AvatarFallbackText>
+        </Avatar>
+        <Text style={estilos.menuTexto}>Zimbo Sebastião</Text>
+        <Text style={estilos.paragraph}>PontoFácil</Text>
+      </View>
       <Button
         title="Close drawer"
         onPress={() => drawer.current.closeDrawer()}
@@ -175,7 +188,7 @@ export default function App() {
           renderNavigationView={navigationView}
         >
           <View style={estilos.container}>
-            <View>
+            <View style={estilos.menu}>
               <Icon
                 onPress={() => drawer.current.openDrawer()}
                 as={MenuIcon}
@@ -183,6 +196,10 @@ export default function App() {
                 w="$10"
                 h="$6"
               />
+              <Text style={estilos.menuTexto}>PontoFácil</Text>
+              <Avatar bgColor="$amber600" size="md" borderRadius="$full">
+                <AvatarFallbackText>Zimbo Sebastião</AvatarFallbackText>
+              </Avatar>
             </View>
 
             <View style={estilos.viewInfo}>
@@ -271,6 +288,21 @@ const estilos = StyleSheet.create({
   container: {
     flex: 1,
   },
+  menu: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+    marginRight: 18,
+  },
+  menuTexto: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  menuAvatar: {
+    marginTop: 60,
+  },
+  menuAvatarConteudo: { alignItems: "center" },
   mapa: { width: "100%", height: "100%" },
   viewMapa: {
     width: "80%",
