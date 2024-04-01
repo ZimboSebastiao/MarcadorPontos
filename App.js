@@ -1,6 +1,12 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { Alert, StatusBar, StyleSheet, View, ScrollView } from "react-native";
+import { useRef, useEffect, useState } from "react";
+import {
+  Alert,
+  StatusBar,
+  StyleSheet,
+  View,
+  DrawerLayoutAndroid,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
@@ -17,7 +23,7 @@ import {
   ActionsheetItemText,
   Icon,
   ClockIcon,
-  ChevronUpIcon,
+  MenuIcon,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
@@ -32,6 +38,26 @@ export default function App() {
   const [hora, setHora] = useState("");
   const [dataAtualizada, setDataAtualizada] = useState("");
   const [diaAtual, setDiaAtual] = useState("");
+
+  const drawer = useRef(null);
+  const [drawerPosition, setDrawerPosition] = useState("left");
+  const changeDrawerPosition = () => {
+    if (drawerPosition === "left") {
+      setDrawerPosition("right");
+    } else {
+      setDrawerPosition("left");
+    }
+  };
+
+  const navigationView = () => (
+    <View style={[estilos.container, estilos.navigationContainer]}>
+      <Text style={estilos.paragraph}>I'm in the Drawer!</Text>
+      <Button
+        title="Close drawer"
+        onPress={() => drawer.current.closeDrawer()}
+      />
+    </View>
+  );
 
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(!showActionsheet);
@@ -135,95 +161,116 @@ export default function App() {
       <GluestackUIProvider config={config}>
         {/* <View style={estilos.viewMapa}>
               <MapView
-                mapType="standard"
-                style={estilos.mapa}
-                region={localizacao ?? regiaoInicialMapa}
+              mapType="standard"
+              style={estilos.mapa}
+              region={localizacao ?? regiaoInicialMapa}
               >
-                {localizacao && <Marker coordinate={localizacao} />}
+              {localizacao && <Marker coordinate={localizacao} />}
               </MapView>
             </View> */}
-        <View style={estilos.container}>
-          <View style={estilos.viewInfo}>
-            <Card style={estilos.cardInfo}>
-              <Card.Title title="Zimbo ALbertina Sebastião" color="white" />
-              <Card.Content style={estilos.cardConteudo}>
-                <View>
-                  <Text variant="titleMedium">{diaAtual}</Text>
-                  <Text variant="titleMedium">{dataAtualizada}</Text>
-                </View>
-                <View>
-                  <Text variant="titleMedium">
-                    <Icon as={ClockIcon} /> {hora}
-                  </Text>
-                </View>
-              </Card.Content>
-            </Card>
-          </View>
-          <View style={estilos.viewCard}>
-            <Card style={estilos.cardColor}>
-              <Card.Content>
-                <View style={estilos.viewInfoHora}>
+        <DrawerLayoutAndroid
+          ref={drawer}
+          drawerWidth={300}
+          drawerPosition={drawerPosition}
+          renderNavigationView={navigationView}
+        >
+          <View style={estilos.container}>
+            <View>
+              <Icon
+                onPress={() => drawer.current.openDrawer()}
+                as={MenuIcon}
+                m="$3"
+                w="$10"
+                h="$6"
+              />
+            </View>
+
+            <View style={estilos.viewInfo}>
+              <Card style={estilos.cardInfo}>
+                <Card.Title title="Zimbo ALbertina Sebastião" color="white" />
+                <Card.Content style={estilos.cardConteudo}>
                   <View>
-                    <Text variant="titleMedium">Entrada:</Text>
-                    <Text variant="titleMedium">Intervalo:</Text>
-                    <Text variant="titleMedium">Fim do Intervalo:</Text>
-                    <Text variant="titleMedium">Saída:</Text>
+                    <Text variant="titleMedium">{diaAtual}</Text>
+                    <Text variant="titleMedium">{dataAtualizada}</Text>
                   </View>
-
                   <View>
-                    <Text>{dataFormatada}</Text>
-                    <Text>12:00</Text>
-                    <Text>13:00</Text>
-                    <Text>--:--</Text>
+                    <Text variant="titleMedium">
+                      <Icon as={ClockIcon} /> {hora}
+                    </Text>
                   </View>
-                </View>
-              </Card.Content>
-            </Card>
-          </View>
-          <View>
-            <Button style={estilos.viewBotao} onPress={marcarPonto}>
-              <ButtonText>Marcar Ponto</ButtonText>
-            </Button>
-          </View>
-          <View>
-            <Button $_text-color="black" style={estilos.viewRelatorio}>
-              <ButtonText>Relatório de Pontos</ButtonText>
-            </Button>
-          </View>
+                </Card.Content>
+              </Card>
+            </View>
+            <View style={estilos.viewCard}>
+              <Card style={estilos.cardColor}>
+                <Card.Content>
+                  <View style={estilos.viewInfoHora}>
+                    <View>
+                      <Text variant="titleMedium">Entrada:</Text>
+                      <Text variant="titleMedium">Intervalo:</Text>
+                      <Text variant="titleMedium">Fim do Intervalo:</Text>
+                      <Text variant="titleMedium">Saída:</Text>
+                    </View>
 
-          <View>
-            <Button onPress={handleClose} style={estilos.modal}>
-              <Icon as={ChevronUpIcon} m="$2" w="$34" h="$35" />
-            </Button>
-            <Actionsheet
-              isOpen={showActionsheet}
-              onClose={handleClose}
-              zIndex={999}
-            >
-              <ActionsheetBackdrop />
-              <ActionsheetContent h="$72" zIndex={999}>
-                <ActionsheetDragIndicatorWrapper>
-                  <ActionsheetDragIndicator />
-                </ActionsheetDragIndicatorWrapper>
-                <Text>Banco de Horas</Text>
+                    <View>
+                      <Text>{dataFormatada}</Text>
+                      <Text>12:00</Text>
+                      <Text>13:00</Text>
+                      <Text>--:--</Text>
+                    </View>
+                  </View>
+                </Card.Content>
+              </Card>
+            </View>
+            <View>
+              <Button style={estilos.viewBotao} onPress={marcarPonto}>
+                <ButtonText>Marcar Ponto</ButtonText>
+              </Button>
+            </View>
+            <View>
+              <Button
+                onPress={handleClose}
+                $_text-color="black"
+                style={estilos.viewRelatorio}
+              >
+                <ButtonText>Requisição Manual</ButtonText>
+              </Button>
+            </View>
+            <View>
+              <Actionsheet
+                isOpen={showActionsheet}
+                onClose={handleClose}
+                zIndex={999}
+              >
+                <ActionsheetBackdrop />
+                <ActionsheetContent h="$72" zIndex={999}>
+                  <ActionsheetDragIndicatorWrapper>
+                    <ActionsheetDragIndicator />
+                  </ActionsheetDragIndicatorWrapper>
+                  <Text>Banco de Horas</Text>
 
-                <ActionsheetItem>
-                  <ActionsheetItemText>Início do banco</ActionsheetItemText>
-                </ActionsheetItem>
-                <ActionsheetItem>
-                  <ActionsheetItemText>Saldo consolidado</ActionsheetItemText>
-                </ActionsheetItem>
-              </ActionsheetContent>
-            </Actionsheet>
+                  <ActionsheetItem>
+                    <ActionsheetItemText>Início do banco:</ActionsheetItemText>
+                  </ActionsheetItem>
+                  <ActionsheetItem>
+                    <ActionsheetItemText>
+                      Saldo consolidado:
+                    </ActionsheetItemText>
+                  </ActionsheetItem>
+                </ActionsheetContent>
+              </Actionsheet>
+            </View>
           </View>
-        </View>
+        </DrawerLayoutAndroid>
       </GluestackUIProvider>
     </>
   );
 }
 
 const estilos = StyleSheet.create({
-  container: { flex: 1, marginVertical: 40 },
+  container: {
+    flex: 1,
+  },
   mapa: { width: "100%", height: "100%" },
   viewMapa: {
     width: "80%",
@@ -265,6 +312,7 @@ const estilos = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
+    marginTop: "10%",
   },
 
   cardInfo: {
@@ -297,5 +345,8 @@ const estilos = StyleSheet.create({
     justifyContent: "space-evenly",
     flexDirection: "row",
     alignItems: "center",
+  },
+  navigationContainer: {
+    backgroundColor: "#ecf0f1",
   },
 });
