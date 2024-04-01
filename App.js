@@ -69,31 +69,35 @@ export default function App() {
         <Text style={estilos.paragraph}>PontoFácil</Text>
       </View>
       <View style={estilos.menuNaveg}>
-        <Button onPress={() => drawer.current.closeDrawer()}>
+        <Button
+          style={estilos.menuBotao}
+          $_text-color="black"
+          onPress={() => drawer.current.closeDrawer()}
+        >
           <ButtonText>
             <Icon as={ClockIcon} color="#828282" m="$2" w="$18" h="$4" />
             Ponto
           </ButtonText>
         </Button>
-        <Button>
+        <Button style={estilos.menuBotao} $_text-color="black">
           <ButtonText>
             <FileText color="#828282" size={18} />
             Relatórios
           </ButtonText>
         </Button>
-        <Button>
+        <Button style={estilos.menuBotao} $_text-color="black">
           <ButtonText>
             <Icon as={SettingsIcon} color="#828282" m="$2" w="$18" h="$4" />
             Configurações
           </ButtonText>
         </Button>
-        <Button>
+        <Button style={estilos.menuBotao} $_text-color="black">
           <ButtonText>
             <Icon as={CloseCircleIcon} color="#828282" m="$2" w="$18" h="$4" />
             Sobre
           </ButtonText>
         </Button>
-        <Button>
+        <Button style={estilos.menuBotao} $_text-color="black">
           <ButtonText>
             <LogOut color="#828282" size={18} />
             Sair
@@ -326,8 +330,14 @@ const estilos = StyleSheet.create({
   },
   menuAvatarConteudo: { alignItems: "center" },
   menuNaveg: {
-    // justifyContent: "flex-end",
     alignItems: "flex-start",
+  },
+  menuBotao: {
+    width: "100%",
+    marginBottom: "6%",
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   mapa: { width: "100%", height: "100%" },
   viewMapa: {
