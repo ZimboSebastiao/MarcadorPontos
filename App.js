@@ -77,34 +77,24 @@ export default function App() {
           $_text-color="black"
           onPress={() => drawer.current.closeDrawer()}
         >
-          <ButtonText>
-            <Icon as={ClockIcon} color="#828282" m="$2" w="$18" h="$4" />
-            Ponto
-          </ButtonText>
+          <Icon as={ClockIcon} color="#828282" m="$2" w="$28" h="$8" />
+          <ButtonText color="#828282">Ponto</ButtonText>
         </Button>
         <Button style={estilos.menuBotao} $_text-color="black">
-          <ButtonText>
-            <FileText color="#828282" size={18} />
-            Relatórios
-          </ButtonText>
+          <FileText color="#828282" size={28} marginLeft={10} />
+          <ButtonText color="#828282"> Relatórios</ButtonText>
         </Button>
         <Button style={estilos.menuBotao} $_text-color="black">
-          <ButtonText>
-            <Icon as={SettingsIcon} color="#828282" m="$2" w="$18" h="$4" />
-            Configurações
-          </ButtonText>
+          <Icon as={SettingsIcon} color="#828282" m="$2" w="$28" h="$8" />
+          <ButtonText color="#828282">Configurações</ButtonText>
         </Button>
         <Button style={estilos.menuBotao} $_text-color="black">
-          <ButtonText>
-            <Icon as={CloseCircleIcon} color="#828282" m="$2" w="$18" h="$4" />
-            Sobre
-          </ButtonText>
+          <Icon as={CloseCircleIcon} color="#828282" m="$2" w="$28" h="$8" />
+          <ButtonText color="#828282">Sobre</ButtonText>
         </Button>
         <Button style={estilos.menuBotao} $_text-color="black">
-          <ButtonText>
-            <LogOut color="#828282" size={18} />
-            Sair
-          </ButtonText>
+          <LogOut color="#828282" size={28} marginLeft={10} />
+          <ButtonText color="#828282"> Sair</ButtonText>
         </Button>
       </View>
     </View>
@@ -411,17 +401,23 @@ export default function App() {
                 zIndex={999}
               >
                 <ActionsheetBackdrop />
-                <ActionsheetContent h="$72" zIndex={999}>
+                <ActionsheetContent
+                  h="$72"
+                  zIndex={999}
+                  backgroundColor="#207FDE"
+                >
                   <ActionsheetDragIndicatorWrapper>
                     <ActionsheetDragIndicator />
                   </ActionsheetDragIndicatorWrapper>
-                  <Text>Banco de Horas</Text>
+                  <Text style={estilos.cardTitulo}>Banco de Horas</Text>
 
                   <ActionsheetItem>
-                    <ActionsheetItemText>Início do banco:</ActionsheetItemText>
+                    <ActionsheetItemText style={estilos.cardTexto}>
+                      Início do banco:
+                    </ActionsheetItemText>
                   </ActionsheetItem>
                   <ActionsheetItem>
-                    <ActionsheetItemText>
+                    <ActionsheetItemText style={estilos.cardTexto}>
                       Saldo consolidado:
                     </ActionsheetItemText>
                   </ActionsheetItem>
