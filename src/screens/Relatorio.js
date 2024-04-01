@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useRef, useEffect, useState } from "react";
 import { Alert, StatusBar, StyleSheet, View } from "react-native";
+import { Card } from "react-native-paper";
 
 import {
   GluestackUIProvider,
@@ -99,6 +100,54 @@ export default function Relatorio({ navigation }) {
               </SelectPortal>
             </Select>
           </View>
+
+          <View style={estilos.viewCard}>
+            <Card style={estilos.cardColor}>
+              <Card.Content>
+                <View style={estilos.viewInfoHora}>
+                  <View>
+                    <Text style={estilos.texto} variant="titleMedium">
+                      Dias trabalhados:
+                    </Text>
+                    <Text style={estilos.texto} variant="titleMedium">
+                      Horas trabalhadas:
+                    </Text>
+                    <Text style={estilos.texto} variant="titleMedium">
+                      Média de horas trabalhadas:
+                    </Text>
+                    <Text style={estilos.texto} variant="titleMedium">
+                      Horas em pausa:
+                    </Text>
+                    <Text style={estilos.texto} variant="titleMedium">
+                      Média de oras em pausa:
+                    </Text>
+                  </View>
+
+                  <View>
+                    <Text>--:--</Text>
+                    <Text>--:--</Text>
+                    <Text>--:--</Text>
+                    <Text>--:--</Text>
+                    <Text>--:--</Text>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          </View>
+
+          <View style={estilos.viewPeriodo}>
+            <View>
+              <Button style={estilos.viewPeriodoBotao} $_text-color="black">
+                <ButtonText>Dia</ButtonText>
+              </Button>
+            </View>
+
+            <View>
+              <Button style={estilos.viewPeriodoBotao} $_text-color="black">
+                <ButtonText>Jornada</ButtonText>
+              </Button>
+            </View>
+          </View>
         </View>
       </GluestackUIProvider>
     </>
@@ -137,9 +186,45 @@ const estilos = StyleSheet.create({
     justifyContent: "center",
     width: "85%",
     borderColor: "blue",
+    marginBottom: 30,
   },
   selecaoEspaco: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  viewCard: {
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginBottom: "6%",
+  },
+  cardColor: {
+    backgroundColor: "#f2f9ff",
+  },
+  texto: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  viewInfoHora: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  viewPeriodo: {
+    width: "90%",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  viewPeriodoBotao: {
+    width: "84%",
+
+    marginBottom: "6%",
+    borderRadius: 40,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    borderColor: "#217dde",
+    borderWidth: 1,
   },
 });

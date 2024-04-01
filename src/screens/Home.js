@@ -490,7 +490,7 @@ const estilos = StyleSheet.create({
     borderRadius: 0,
   },
   viewInfoHora: {
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
   },
