@@ -16,7 +16,7 @@ import {
   ActionsheetItem,
   ActionsheetItemText,
   Icon,
-  TrashIcon,
+  ClockIcon,
   ChevronUpIcon,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
@@ -29,6 +29,9 @@ export default function App() {
   const [minhaLocalizacao, setMinhaLocalizacao] = useState(null);
   const [dataFormatada, setDataFormatada] = useState("");
   const [data, setData] = useState("");
+  const [hora, setHora] = useState("");
+  const [dataAtualizada, setDataAtualizada] = useState("");
+  const [diaAtual, setDiaAtual] = useState("");
 
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(!showActionsheet);
@@ -94,6 +97,38 @@ export default function App() {
     setData(data);
   };
 
+  const atualizarHora = () => {
+    const agora = new Date();
+    const diaSemanaArray = [
+      "Domingo",
+      "Segunda-feira",
+      "Terça-feira",
+      "Quarta-feira",
+      "Quinta-feira",
+      "Sexta-feira",
+      "Sábado",
+    ];
+    const diaSemana = diaSemanaArray[agora.getDay()];
+    const dia = String(agora.getDate()).padStart(2, "0");
+    const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
+    const ano = agora.getFullYear();
+    const horas = String(agora.getHours()).padStart(2, "0");
+    const minutos = String(agora.getMinutes()).padStart(2, "0");
+    const segundos = String(agora.getSeconds()).padStart(2, "0");
+
+    const hora = `${horas}:${minutos}:${segundos}`;
+    const dataAtual = ` ${dia}/${mes}/${ano}`;
+    const diaAtual = `${diaSemana}`;
+    setHora(hora);
+    setDataAtualizada(dataAtual);
+    setDiaAtual(diaAtual);
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(atualizarHora, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <StatusBar />
@@ -110,10 +145,17 @@ export default function App() {
         <View style={estilos.container}>
           <View style={estilos.viewInfo}>
             <Card style={estilos.cardInfo}>
-              <Card.Title title="Zimbo ALbertina Sebastião" />
-              <Card.Content>
-                <Text variant="titleMedium">Segunda-Feira</Text>
-                <Text variant="titleMedium">{data}</Text>
+              <Card.Title title="Zimbo ALbertina Sebastião" color="white" />
+              <Card.Content style={estilos.cardConteudo}>
+                <View>
+                  <Text variant="titleMedium">{diaAtual}</Text>
+                  <Text variant="titleMedium">{dataAtualizada}</Text>
+                </View>
+                <View>
+                  <Text variant="titleMedium">
+                    <Icon as={ClockIcon} /> {hora}
+                  </Text>
+                </View>
               </Card.Content>
             </Card>
           </View>
@@ -138,13 +180,13 @@ export default function App() {
               </Card.Content>
             </Card>
           </View>
-          <View style={estilos.viewBotao}>
-            <Button onPress={marcarPonto}>
+          <View>
+            <Button style={estilos.viewBotao} onPress={marcarPonto}>
               <ButtonText>Marcar Ponto</ButtonText>
             </Button>
           </View>
-          <View style={estilos.viewRelatorio}>
-            <Button>
+          <View>
+            <Button $_text-color="black" style={estilos.viewRelatorio}>
               <ButtonText>Relatório de Pontos</ButtonText>
             </Button>
           </View>
@@ -164,7 +206,7 @@ export default function App() {
                   <ActionsheetDragIndicator />
                 </ActionsheetDragIndicatorWrapper>
                 <Text>Banco de Horas</Text>
-                <Icon as={TrashIcon} />
+
                 <ActionsheetItem>
                   <ActionsheetItemText>Início do banco</ActionsheetItemText>
                 </ActionsheetItem>
@@ -197,12 +239,17 @@ const estilos = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
+    borderRadius: 40,
   },
   viewRelatorio: {
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
+    borderRadius: 40,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    borderColor: "#217dde",
+    borderWidth: 1,
   },
   viewCard: {
     width: "90%",
@@ -211,7 +258,7 @@ const estilos = StyleSheet.create({
     marginBottom: "6%",
   },
   cardColor: {
-    backgroundColor: "#F2F9FF",
+    backgroundColor: "#f2f9ff",
   },
   viewInfo: {
     width: "90%",
@@ -222,12 +269,25 @@ const estilos = StyleSheet.create({
 
   cardInfo: {
     backgroundColor: "#207FDE",
+    textDecorationColor: "white",
+    color: "white",
+  },
+  cardConteudo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  cardInfoText: {
+    textAlign: "center",
+    backgroundColor: "red",
+    textDecorationColor: "white",
   },
   modal: {
     position: "relative",
     width: "100%",
     backgroundColor: "#CBDAF0",
-    bottom: "-70%",
+    bottom: "-65%",
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
   },
   gaveta: {
     width: "100%",
