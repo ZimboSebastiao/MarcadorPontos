@@ -1,4 +1,14 @@
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import {
+  Alert,
+  Button,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+} from "react-native";
+import backgroundImage from "../../assets/images/login.png";
+import { Image } from "react-native";
 
 // Importando os recursos de autenticação
 import { auth } from "../../firebase.config";
@@ -57,53 +67,86 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <View style={estilos.container}>
-      <View style={estilos.formulario}>
-        <TextInput
-          onChangeText={(valor) => setEmail(valor)}
-          placeholder="E-mail"
-          style={estilos.input}
+    <>
+      <View style={estilos.container}>
+        <Image
+          source={backgroundImage}
+          resizeMode=""
+          style={{ ...estilos.background }}
         />
-        <TextInput
-          onChangeText={(valor) => setSenha(valor)}
-          placeholder="Senha"
-          style={estilos.input}
-          secureTextEntry
-        />
-        <View style={estilos.botoes}>
-          <Button onPress={login} title="Entre" color="green" />
-          <Button
-            title="Recuperar senha"
-            color="grey"
-            onPress={recuperarSenha}
+        <View style={estilos.formulario}>
+          <TextInput
+            onChangeText={(valor) => setEmail(valor)}
+            placeholder="E-mail"
+            style={estilos.input}
           />
+          <TextInput
+            onChangeText={(valor) => setSenha(valor)}
+            placeholder="Senha"
+            style={estilos.input}
+            secureTextEntry
+          />
+          <View>
+            <Pressable style={estilos.botaoRecuperar} onPress={recuperarSenha}>
+              <Text style={estilos.textoBotaoRecuperar}>Esqueceu a senha?</Text>
+            </Pressable>
+
+            <Pressable style={estilos.botoes} onPress={login}>
+              <Text style={estilos.textoBotao}>Conectar</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 }
 
 const estilos = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     backgroundColor: "lightgreen",
-  //     alignItems: "center",
-  //     justifyContent: "center",
-  //   },
-  //   formulario: {
-  //     marginBottom: 32,
-  //     width: "80%",
-  //   },
-  //   input: {
-  //     backgroundColor: "white",
-  //     marginVertical: 8,
-  //     padding: 8,
-  //     borderRadius: 4,
-  //   },
-  //   botoes: {
-  //     marginVertical: 8,
-  //     width: "100%",
-  //     flexDirection: "row",
-  //     justifyContent: "space-between",
-  //   },
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  background: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "auto",
+    height: "35%",
+  },
+  formulario: {
+    marginVertical: 30,
+    padding: 10,
+  },
+  input: {
+    borderWidth: 1,
+    padding: 15,
+    borderColor: "#207FDE",
+    borderRadius: 40,
+    marginVertical: 20,
+  },
+  botoes: {
+    borderWidth: 1,
+    padding: 15,
+    borderColor: "#207FDE",
+    borderRadius: 40,
+    marginVertical: 20,
+    backgroundColor: "#207FDE",
+    alignItems: "center",
+  },
+  botaoRecuperar: {
+    padding: 0,
+    marginVertical: 4,
+    alignItems: "flex-end",
+  },
+  textoBotao: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
+
+  textoBotaoRecuperar: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "grey",
+  },
 });
