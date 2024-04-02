@@ -6,10 +6,12 @@ import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
 import { Card } from "react-native-paper";
 
+import { auth } from "../../firebase.config";
+import { signOut } from "firebase/auth";
+
 import {
   GluestackUIProvider,
   Text,
-  Box,
   ActionsheetBackdrop,
   ActionsheetDragIndicatorWrapper,
   ActionsheetDragIndicator,
@@ -17,11 +19,10 @@ import {
   ActionsheetItemText,
   Icon,
   ClockIcon,
-  MenuIcon,
   Avatar,
   AvatarFallbackText,
-  CircleIcon,
 } from "@gluestack-ui/themed";
+import { Circle, AlignLeft } from "lucide-react-native";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
 import { ButtonText } from "@gluestack-ui/themed";
@@ -39,27 +40,10 @@ export default function Home({ navigation }) {
   const [fimIntervalo, setFimIntervalo] = useState("");
   const [saida, setSaida] = useState("");
 
-  // const drawer = useRef(null);
-  // const [drawerPosition, setDrawerPosition] = useState("left");
-  // const changeDrawerPosition = () => {
-  //   if (drawerPosition === "left") {
-  //     setDrawerPosition("right");
-  //   } else {
-  //     setDrawerPosition("left");
-  //   }
-  // };
+  // console.log(auth.currentUser);
 
-  // const navigationView = () => (
-  //   <View style={[estilos.container, estilos.navigationContainer]}>
-  //     <View style={estilos.menuAvatarConteudo}>
-  //       <Avatar
-  //         style={estilos.menuAvatar}
-  //         bgColor="$amber600"
-  //         size="xl"
-  //         borderRadius="$full"
-  //       >
-  //         <AvatarFallbackText>Zimbo Sebastião</AvatarFallbackText>
-  //       </Avatar>
+  const { email, displayName: nome } = auth.currentUser;
+  // console.log(email);
 
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(!showActionsheet);
@@ -258,12 +242,12 @@ export default function Home({ navigation }) {
       <GluestackUIProvider config={config}>
         <View style={estilos.container}>
           <View style={estilos.menu}>
-            <Icon
+            <AlignLeft
               onPress={() => navigation.openDrawer()}
-              as={MenuIcon}
               m="$3"
               w="$10"
               h="$6"
+              color="black"
             />
             <Text style={estilos.menuTexto}>PontoFácil</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
@@ -327,7 +311,7 @@ export default function Home({ navigation }) {
           </View>
           <View>
             <Button style={estilos.viewBotao} onPress={marcarPonto}>
-              <Icon as={CircleIcon} m="$2" w="$5" h="$5" color="white" />
+              <Circle m="$2" w="$5" h="$5" color="white" />
               <ButtonText>Marcar Ponto </ButtonText>
             </Button>
           </View>
@@ -385,7 +369,8 @@ const estilos = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
-    marginRight: 18,
+    marginRight: 10,
+    padding: 10,
   },
   menuTexto: {
     fontSize: 18,
@@ -485,10 +470,7 @@ const estilos = StyleSheet.create({
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
   },
-  gaveta: {
-    width: "100%",
-    borderRadius: 0,
-  },
+
   viewInfoHora: {
     justifyContent: "space-between",
     flexDirection: "row",

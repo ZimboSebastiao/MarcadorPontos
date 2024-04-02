@@ -7,11 +7,8 @@ import {
   GluestackUIProvider,
   Text,
   Icon,
-  ClockIcon,
-  MenuIcon,
   Avatar,
   AvatarFallbackText,
-  CircleIcon,
   VStack,
   HStack,
   AvatarImage,
@@ -28,11 +25,11 @@ import {
   SelectDragIndicator,
   SelectItem,
 } from "@gluestack-ui/themed";
+import { AlignLeft } from "lucide-react-native";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
 import { ButtonText } from "@gluestack-ui/themed";
 import { Button } from "@gluestack-ui/themed";
-import { ActionsheetContent } from "@gluestack-ui/themed";
 
 export default function Relatorio({ navigation }) {
   return (
@@ -41,12 +38,12 @@ export default function Relatorio({ navigation }) {
       <GluestackUIProvider config={config}>
         <View style={estilos.container}>
           <View style={estilos.menu}>
-            <Icon
+            <AlignLeft
               onPress={() => navigation.openDrawer()}
-              as={MenuIcon}
               m="$3"
               w="$10"
               h="$6"
+              color="black"
             />
             <Text style={estilos.menuTexto}>Relatório</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
@@ -163,7 +160,8 @@ const estilos = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
-    marginRight: 18,
+    marginRight: 10,
+    padding: 10,
   },
   menuTexto: {
     fontSize: 18,
