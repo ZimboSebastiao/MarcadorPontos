@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MarcadorPontos",
-    "slug": "MarcadorPontos",
+    "name": "Ponto Fácil",
+    "slug": "ponto-facil",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -19,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.zimbo.pontofacil"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5536a82e-423d-47fd-ab08-fd429e175ff7"
+      }
     }
   }
 }

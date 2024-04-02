@@ -7,7 +7,6 @@ import * as Calendar from "expo-calendar";
 import { Card } from "react-native-paper";
 
 import { auth } from "../../firebase.config";
-import { signOut } from "firebase/auth";
 
 import {
   GluestackUIProvider,

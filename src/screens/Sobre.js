@@ -13,7 +13,7 @@ export default function Sobre() {
   return (
     <View style={estilos.subContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={estilos.subtitulo}>Sobre o app Dá Horas Filmes</Text>
+        <Text style={estilos.subtitulo}>EM CONSTRUÇÃO</Text>
       </ScrollView>
     </View>
   );

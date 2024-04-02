@@ -15,7 +15,6 @@ import { Image } from "react-native";
 
 export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
-  const [cargo, setCargo] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -83,12 +82,6 @@ export default function Cadastro({ navigation }) {
             keyboardType="default"
             onChangeText={(valor) => setNome(valor)}
           />
-          <TextInput
-            placeholder="Cargo"
-            style={estilos.input}
-            keyboardType="default"
-            onChangeText={(valor) => setCargo(valor)}
-          />
 
           <TextInput
             placeholder="Seu E-mail"
@@ -130,7 +123,7 @@ const estilos = StyleSheet.create({
     marginVertical: 30,
     padding: 10,
 
-    width: "85%",
+    width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
   },
@@ -144,10 +137,10 @@ const estilos = StyleSheet.create({
   },
   botoes: {
     borderWidth: 1,
-    padding: 8,
+    padding: 15,
     borderColor: "#207FDE",
     borderRadius: 40,
-    marginVertical: 15,
+    marginVertical: 20,
     backgroundColor: "#207FDE",
     alignItems: "center",
   },
