@@ -74,11 +74,7 @@ export default function Cadastro({ navigation }) {
   return (
     <>
       <View style={estilos.container}>
-        <Image
-          source={backgroundImage}
-          resizeMode=""
-          style={{ ...estilos.background }}
-        />
+        <Image source={backgroundImage} style={{ ...estilos.background }} />
         <View style={estilos.formulario}>
           <TextInput
             placeholder="Nome Completo"
