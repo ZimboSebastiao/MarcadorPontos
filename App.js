@@ -16,7 +16,6 @@ import Home from "./src/screens/Home";
 import Sobre from "./src/screens/Sobre";
 import Relatorio from "./src/screens/Relatorio";
 import Configuracoes from "./src/screens/Configuracoes";
-import Sair from "./src/screens/Sair";
 
 import Inicial from "./src/screens/Inicial";
 // import Cadastro from './src/screens/Cadastro';

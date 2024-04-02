@@ -2,9 +2,8 @@ import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 
 // Importando os recursos de autenticação
 import { auth } from "../../firebase.config";
-console.log("auth:", auth); // Adicione este log
+// console.log("auth:", auth);
 
-// Importando a função de login com e-mail e senha
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -17,8 +16,8 @@ export default function Login({ navigation }) {
   const [senha, setSenha] = useState("");
 
   const login = async () => {
-    console.log("email:", email); // Adicione este log
-    console.log("senha:", senha); // Adicione este log
+    // console.log("email:", email); // Adicione este log
+    // console.log("senha:", senha); // Adicione este log
 
     if (!email || !senha) {
       Alert.alert("Atenção!", "Preencha e-mail e senha!");
