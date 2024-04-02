@@ -251,16 +251,14 @@ export default function Home({ navigation }) {
             />
             <Text style={estilos.menuTexto}>PontoFácil</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-              <AvatarFallbackText>Zimbo Sebastião</AvatarFallbackText>
+              <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
             </Avatar>
           </View>
 
           <View style={estilos.viewInfo}>
             <Card style={estilos.cardInfo}>
               <Card.Content>
-                <Text style={estilos.cardTitulo}>
-                  Zimbo Albertina Sebastião
-                </Text>
+                <Text style={estilos.cardTitulo}>{nome || "Visitante"}</Text>
                 <View style={estilos.cardConteudo}>
                   <View>
                     <Text style={estilos.cardTexto} variant="titleMedium">
@@ -312,7 +310,7 @@ export default function Home({ navigation }) {
           <View>
             <Button style={estilos.viewBotao} onPress={marcarPonto}>
               <Circle m="$2" w="$5" h="$5" color="white" />
-              <ButtonText>Marcar Ponto </ButtonText>
+              <ButtonText> Marcar Ponto </ButtonText>
             </Button>
           </View>
           <View>

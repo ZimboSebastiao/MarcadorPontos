@@ -39,15 +39,15 @@ export default function Cadastro({ navigation }) {
       Alert.alert("Cadastro", "Seu cadastro foi concluído com sucesso!", [
         {
           style: "cancel",
-          text: "Ficar aqui mesmo",
+          text: "Permanecer",
           onPress: () => {
             return;
           },
         },
         {
           style: "default",
-          text: "Ir para a área logada",
-          onPress: () => navigation.replace("AreaLogada"),
+          text: "Ir para a Home",
+          onPress: () => navigation.navigate("Pontos"),
         },
       ]);
     } catch (error) {

@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useRef, useEffect, useState } from "react";
-import { Alert, StatusBar, StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 import { Card } from "react-native-paper";
+import { auth } from "../../firebase.config";
+import { signOut } from "firebase/auth";
 
 import {
   GluestackUIProvider,
@@ -27,11 +28,11 @@ import {
 } from "@gluestack-ui/themed";
 import { AlignLeft } from "lucide-react-native";
 import { config } from "@gluestack-ui/config";
-import { Actionsheet } from "@gluestack-ui/themed";
 import { ButtonText } from "@gluestack-ui/themed";
 import { Button } from "@gluestack-ui/themed";
 
 export default function Relatorio({ navigation }) {
+  const { email, displayName: nome } = auth.currentUser;
   return (
     <>
       <StatusBar />
@@ -47,7 +48,7 @@ export default function Relatorio({ navigation }) {
             />
             <Text style={estilos.menuTexto}>Relatório</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-              <AvatarFallbackText>Zimbo Sebastião</AvatarFallbackText>
+              <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
             </Avatar>
           </View>
 
@@ -69,7 +70,7 @@ export default function Relatorio({ navigation }) {
                   />
                 </Avatar>
                 <VStack>
-                  <Heading size="sm">Zimbo Sebastião</Heading>
+                  <Heading size="sm">{nome || "Visitante"}</Heading>
                   <Text size="sm">Developer</Text>
                 </VStack>
               </HStack>
