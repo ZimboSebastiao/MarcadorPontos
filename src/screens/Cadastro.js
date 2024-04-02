@@ -15,6 +15,7 @@ import { Image } from "react-native";
 
 export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
+  const [cargo, setCargo] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -83,11 +84,19 @@ export default function Cadastro({ navigation }) {
             onChangeText={(valor) => setNome(valor)}
           />
           <TextInput
+            placeholder="Cargo"
+            style={estilos.input}
+            keyboardType="default"
+            onChangeText={(valor) => setCargo(valor)}
+          />
+
+          <TextInput
             placeholder="Seu E-mail"
             style={estilos.input}
             keyboardType="email-address"
             onChangeText={(valor) => setEmail(valor)}
           />
+
           <TextInput
             onChangeText={(valor) => setSenha(valor)}
             placeholder="Nova Senha"
@@ -120,20 +129,25 @@ const estilos = StyleSheet.create({
   formulario: {
     marginVertical: 30,
     padding: 10,
+
+    width: "85%",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   input: {
     borderWidth: 1,
     padding: 15,
     borderColor: "#207FDE",
     borderRadius: 40,
-    marginVertical: 20,
+    marginVertical: 10,
+    height: 47,
   },
   botoes: {
     borderWidth: 1,
-    padding: 15,
+    padding: 8,
     borderColor: "#207FDE",
     borderRadius: 40,
-    marginVertical: 20,
+    marginVertical: 15,
     backgroundColor: "#207FDE",
     alignItems: "center",
   },
@@ -143,13 +157,13 @@ const estilos = StyleSheet.create({
     alignItems: "flex-end",
   },
   textoBotao: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
     color: "white",
   },
 
   textoBotaoRecuperar: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "bold",
     color: "grey",
   },

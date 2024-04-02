@@ -1,6 +1,10 @@
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+  createDrawerNavigator,
+} from "@react-navigation/drawer";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 
@@ -21,6 +25,7 @@ import Inicial from "./src/screens/Inicial";
 import Cadastro from "./src/screens/Cadastro";
 import Login from "./src/screens/Login";
 import Logout from "./src/components/Logout";
+import UsuarioAvatar from "./src/screens/UsuarioAvatar";
 
 const Drawer = createDrawerNavigator();
 
@@ -37,6 +42,14 @@ export default function App() {
     return unsubscribe;
   }, []);
 
+  function CustomDrawerContent(props) {
+    return (
+      <DrawerContentScrollView {...props}>
+        {isUserLoggedIn && <UsuarioAvatar />}
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    );
+  }
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -47,6 +60,7 @@ export default function App() {
             headerStyle: { backgroundColor: "#1D1D1D" },
             headerTintColor: "white",
           }}
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
           {isUserLoggedIn ? (
             <>
