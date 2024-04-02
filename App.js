@@ -18,7 +18,7 @@ import Relatorio from "./src/screens/Relatorio";
 import Configuracoes from "./src/screens/Configuracoes";
 
 import Inicial from "./src/screens/Inicial";
-// import Cadastro from './src/screens/Cadastro';
+import Cadastro from "./src/screens/Cadastro";
 import Login from "./src/screens/Login";
 import Logout from "./src/components/Logout";
 
@@ -111,6 +111,13 @@ export default function App() {
               <Drawer.Screen
                 name="Login"
                 component={Login}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Drawer.Screen
+                name="Cadastro"
+                component={Cadastro}
                 options={{
                   headerShown: false,
                 }}

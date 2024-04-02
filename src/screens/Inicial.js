@@ -1,5 +1,8 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 
+import backgroundImage from "../../assets/images/login.png";
+import { Image } from "react-native";
+
 export default function Inicial({ navigation }) {
   return (
     <View style={estilos.container}>

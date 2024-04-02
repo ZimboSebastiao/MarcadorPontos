@@ -1,50 +1,64 @@
+import { auth } from "../../firebase.config";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useState } from "react";
 import {
   Alert,
-  Button,
+  Text,
   Pressable,
   StyleSheet,
   TextInput,
   View,
-  Text,
 } from "react-native";
-import backgroundImage from "../../assets/images/signin.png";
+
+import backgroundImage from "../../assets/images/login.png";
 import { Image } from "react-native";
 
-// Importando os recursos de autenticação
-import { auth } from "../../firebase.config";
-// console.log("auth:", auth);
-
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
-import { useState } from "react";
-
-export default function Login({ navigation }) {
+export default function Cadastro({ navigation }) {
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const login = async () => {
-    // console.log("email:", email); // Adicione este log
-    // console.log("senha:", senha); // Adicione este log
-
-    if (!email || !senha) {
-      Alert.alert("Atenção!", "Preencha e-mail e senha!");
+  const cadastrar = async () => {
+    if (!email || !senha || !nome) {
+      Alert.alert("Atenção!", "Preencha nome, e-mail e senha!");
       return;
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, senha);
-      navigation.navigate("Pontos");
-    } catch (error) {
-      console.error("error:", error); // Adicione este log
-      console.error(error.code);
+      const contaUsuario = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        senha
+      );
 
+      if (contaUsuario.user) {
+        await updateProfile(auth.currentUser, { displayName: nome });
+        console.log(contaUsuario.user.displayName);
+      }
+
+      Alert.alert("Cadastro", "Seu cadastro foi concluído com sucesso!", [
+        {
+          style: "cancel",
+          text: "Ficar aqui mesmo",
+          onPress: () => {
+            return;
+          },
+        },
+        {
+          style: "default",
+          text: "Ir para a área logada",
+          onPress: () => navigation.replace("AreaLogada"),
+        },
+      ]);
+    } catch (error) {
+      // console.error(error.code);
       let mensagem;
       switch (error.code) {
-        case "auth/invalid-credential":
-          mensagem = "Dados inválidos!";
+        case "auth/email-already-in-use":
+          mensagem = "E-mail já cadastrado!";
+          break;
+        case "auth/weak-password":
+          mensagem = "Senha fraca (mínimo de 6 caracteres)";
           break;
         case "auth/invalid-email":
           mensagem = "Endereço de e-mail inválido!";
@@ -54,15 +68,6 @@ export default function Login({ navigation }) {
           break;
       }
       Alert.alert("Ops!", mensagem);
-    }
-  };
-
-  const recuperarSenha = async () => {
-    try {
-      await sendPasswordResetEmail(auth, email);
-      Alert.alert("Recuperar senha", "Verifique sua caixa de e-mails.");
-    } catch (error) {
-      console.error("error:", error); // Adicione este log
     }
   };
 
@@ -76,23 +81,26 @@ export default function Login({ navigation }) {
         />
         <View style={estilos.formulario}>
           <TextInput
-            onChangeText={(valor) => setEmail(valor)}
-            placeholder="E-mail"
+            placeholder="Nome Completo"
             style={estilos.input}
+            keyboardType="default"
+            onChangeText={(valor) => setNome(valor)}
+          />
+          <TextInput
+            placeholder="Seu E-mail"
+            style={estilos.input}
+            keyboardType="email-address"
+            onChangeText={(valor) => setEmail(valor)}
           />
           <TextInput
             onChangeText={(valor) => setSenha(valor)}
-            placeholder="Senha"
+            placeholder="Nova Senha"
             style={estilos.input}
             secureTextEntry
           />
           <View>
-            <Pressable style={estilos.botaoRecuperar} onPress={recuperarSenha}>
-              <Text style={estilos.textoBotaoRecuperar}>Esqueceu a senha?</Text>
-            </Pressable>
-
-            <Pressable style={estilos.botoes} onPress={login}>
-              <Text style={estilos.textoBotao}>Conectar</Text>
+            <Pressable style={estilos.botoes} onPress={cadastrar}>
+              <Text style={estilos.textoBotao}>Cadastrar</Text>
             </Pressable>
           </View>
         </View>
