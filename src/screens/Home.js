@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useRef, useEffect, useState } from "react";
-import { Alert, StatusBar, StyleSheet, View } from "react-native";
+import { Alert, ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
@@ -114,7 +114,7 @@ export default function Home({ navigation }) {
   }, []);
   
 
-  console.log(endereco);
+  // console.log(endereco);
 
   const [localizacao, setLocalizacao] = useState(null);
 
@@ -321,7 +321,7 @@ export default function Home({ navigation }) {
     <>
       <StatusBar />
       <GluestackUIProvider config={config}>
-        <View style={estilos.container}>
+        <ScrollView style={estilos.container}>
           <View style={estilos.viewMenu} >
             <View style={estilos.menu}>
               <AlignLeft
@@ -338,15 +338,15 @@ export default function Home({ navigation }) {
               </Avatar>
             </View>
 
-            <View style={{flexDirection: "row", alignItems: "center", marginTop: 20}}>
+              <View style={{flexDirection: "row", alignItems: "center", marginTop: 5}}>
 
-            <MapPin 
-                color="white"
-                size={16}
-                padding="20"
-                style={{ marginTop: 23}}
-                
-                />
+                <MapPin 
+                  color="white"
+                  size={16}
+                  padding="20"
+                  style={{ marginTop: 23}}
+                  
+                  />
               <View style={{justifyContent: "space-between", alignItems: "flex-start", padding: 6, margin: 6,}}> 
               <Text style={{ color: "#DEDEBF", fontSize: 13, marginBottom: 10}}>Você está na</Text>
              
@@ -362,57 +362,72 @@ export default function Home({ navigation }) {
               <Heading style={estilos.cardTitulo}>
                 Registros de hoje 
               </Heading>
-              <Card.Content>
+              <Card.Content> 
                
               
                 <View style={estilos.cardConteudo}>
                   <View>
-                    <Text style={estilos.cardTexto} variant="titleMedium">
-                      {diaAtual}
-                    </Text>
-                    <Text style={estilos.cardTexto} variant="titleMedium">
-                      {dataAtualizada}
-                    </Text>
+                    <Text style={estilos.cardTexto} variant="titleMedium"> {diaAtual}</Text>
+                    <Text style={estilos.cardTexto} variant="titleMedium">{dataAtualizada}</Text>
                   </View>
                   <View style={estilos.cardIcon}>
-                    <Icon as={ClockIcon} color="black" m="$0"  h="$6"  />
-                    <Text style={estilos.cardTexto} variant="titleMedium">
-                      {hora}
-                    </Text>
+                    <Icon as={ClockIcon} color="#ef7135" m="$0"  h="$6"  />
+                    <Text style={estilos.cardHora} variant="titleMedium"> {hora}</Text>
                   </View>
                 </View>
+
                 <Divider 
                   orientation="vertical"  
                   width="100%" 
-                  h="auto" 
                   my="$2"
                   />
 
                 <View style={estilos.viewInfoHora}>
-                  <View>
-                    <Text style={estilos.texto} variant="titleMedium">
-                     1º Registro - Entrada:
-                    </Text>
-                    <Text style={estilos.texto} variant="titleMedium">
-                      Intervalo:
-                    </Text>
-                    <Text style={estilos.texto} variant="titleMedium">
-                      Fim do Intervalo:
-                    </Text>
-                    <Text style={estilos.texto} variant="titleMedium">
-                      Saída:
-                    </Text>
-                  </View>
+                  <View style={{width: "100%"}}> 
 
-                  <View>
-                    <Text>{dataFormatada}</Text>
-                    <Text>{intervalo}</Text>
-                    <Text>{fimIntervalo}</Text>
-                    <Text>{saida}</Text>
+                    <View style={estilos.viewRegistros}>
+                      <Text style={estilos.texto} variant="titleMedium">1º Registro - Entrada</Text>
+                      <Text style={estilos.textoRegistros}>{dataFormatada}</Text>
+                    </View>
+
+                    <Divider 
+                      orientation="vertical"  
+                      width="100%" 
+                      h="auto" 
+                      my="$2"
+                      />
+
+                    <View style={estilos.viewRegistros}>
+                      <Text style={estilos.texto} variant="titleMedium">2º Registro - Intervalo</Text>
+                      <Text style={estilos.textoRegistros}>{intervalo}</Text>
+                    </View>
+
+                    <Divider 
+                      orientation="vertical"  
+                      width="100%" 
+                      h="auto" 
+                      my="$2"
+                      />
+
+                    <View style={estilos.viewRegistros}>
+                      <Text style={estilos.texto} variant="titleMedium">3º Registro - Fim do Intervalo</Text>
+                      <Text style={estilos.textoRegistros}>{fimIntervalo}</Text>
+                    </View>
+
+                    <Divider 
+                      orientation="vertical"  
+                      width="100%" 
+                      h="auto" 
+                      my="$2"
+                      />
+
+                    <View style={estilos.viewRegistros}>                   
+                      <Text style={estilos.texto} variant="titleMedium">4º Registro - Saída</Text>
+                      <Text style={estilos.textoRegistros}>{saida}</Text>
+                    </View>
+
                   </View>
                 </View>
-                  
-
               </Card.Content>
             </Card>
           </View>
@@ -462,7 +477,7 @@ export default function Home({ navigation }) {
               </ActionsheetContent>
             </Actionsheet>
           </View>
-        </View>
+        </ScrollView>
       </GluestackUIProvider>
     </>
   );
@@ -540,16 +555,17 @@ const estilos = StyleSheet.create({
   cardColor: {
     backgroundColor: "#f2f9ff",
   },
-  cardTexto: { color: "black", marginBottom: 6 },
+  cardTexto: { color: "black", marginBottom: 10, fontWeight: "bold" },
+  cardHora: { color: "#ef7135", marginBottom: 10, fontWeight: "bold" },
   cardTitulo: {
     color: "#ef7135",
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: "bold",
     justifyContent: "space-between",
     marginBottom: 12,
-    backgroundColor: "#FFC4BE",
+    backgroundColor: "#fde7dc",
     alignItems: "center",
-    textAlign: "center"
+    paddingLeft: 20
   },
   bancoTitulo: {
     color: "#ef7135",
@@ -568,19 +584,21 @@ const estilos = StyleSheet.create({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: "6%",
-    marginTop: "10%",
+    marginTop: "10",
   },
   texto: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 14,
+    color: "#6F6F6F",
+    marginBottom: 5,
+    marginTop: 20,
   },
 
   cardInfo: {
     textDecorationColor: "black",
     color: "black",
     marginVertical: 40,
-    marginBottom: 90,
+    marginBottom: 20,
   },
   cardConteudo: {
     flexDirection: "row",
@@ -603,11 +621,19 @@ const estilos = StyleSheet.create({
   },
 
   viewInfoHora: {
-    justifyContent: "space-between",
-    flexDirection: "row",
     alignItems: "center",
+    width: "100%",    
   },
   navigationContainer: {
     backgroundColor: "#ecf0f1",
   },
+  viewRegistros: {
+    marginBottom:20,
+  },
+  textoRegistros: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 22,
+    paddingLeft: 6
+  }
 });
