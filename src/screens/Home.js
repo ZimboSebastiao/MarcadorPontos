@@ -4,7 +4,7 @@ import { Alert, StatusBar, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import * as Calendar from "expo-calendar";
-import { Card } from "react-native-paper";
+import { Card, Divider} from "react-native-paper";
 
 import { auth } from "../../firebase.config";
 
@@ -20,8 +20,9 @@ import {
   ClockIcon,
   Avatar,
   AvatarFallbackText,
+  Heading,
 } from "@gluestack-ui/themed";
-import { Circle, AlignLeft } from "lucide-react-native";
+import { Circle, AlignLeft, MapPin } from "lucide-react-native";
 import { config } from "@gluestack-ui/config";
 import { Actionsheet } from "@gluestack-ui/themed";
 import { ButtonText } from "@gluestack-ui/themed";
@@ -240,24 +241,42 @@ export default function Home({ navigation }) {
       <StatusBar />
       <GluestackUIProvider config={config}>
         <View style={estilos.container}>
-          <View style={estilos.menu}>
-            <AlignLeft
-              onPress={() => navigation.openDrawer()}
-              m="$3"
-              w="$10"
-              h="$6"
-              color="black"
-            />
-            <Text style={estilos.menuTexto}>PontoFácil</Text>
-            <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-              <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
-            </Avatar>
+          <View style={estilos.viewMenu} >
+            <View style={estilos.menu}>
+              <AlignLeft
+                onPress={() => navigation.openDrawer()}
+                m="$3"
+                w="$10"
+                h="$6"
+                color="white"
+              />
+              <Text style={estilos.menuTexto}>Olá, {nome || "Visitante"}</Text>
+              <Avatar bgColor="$amber600" size="md" borderRadius="$full">
+                <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
+              </Avatar>
+            </View>
+
+            <View>
+              <Text> Você está próximo a</Text>
+
+              <Text style={estilos.textoMenu}> 
+                <MapPin 
+                color="white"
+                />
+                Avenida prof joão batista conti, 597
+              </Text>
+
+            </View>
           </View>
 
           <View style={estilos.viewInfo}>
             <Card style={estilos.cardInfo}>
+              <Heading style={estilos.cardTitulo}>
+                Registros de hoje 
+              </Heading>
               <Card.Content>
-                <Text style={estilos.cardTitulo}>{nome || "Visitante"}</Text>
+               
+              
                 <View style={estilos.cardConteudo}>
                   <View>
                     <Text style={estilos.cardTexto} variant="titleMedium">
@@ -268,22 +287,23 @@ export default function Home({ navigation }) {
                     </Text>
                   </View>
                   <View style={estilos.cardIcon}>
-                    <Icon as={ClockIcon} color="white" m="$0" w="$18" h="$6" />
+                    <Icon as={ClockIcon} color="black" m="$0"  h="$6"  />
                     <Text style={estilos.cardTexto} variant="titleMedium">
                       {hora}
                     </Text>
                   </View>
                 </View>
-              </Card.Content>
-            </Card>
-          </View>
-          <View style={estilos.viewCard}>
-            <Card style={estilos.cardColor}>
-              <Card.Content>
+                <Divider 
+                  orientation="vertical"  
+                  width="100%" 
+                  h="auto" 
+                  my="$2"
+                  />
+
                 <View style={estilos.viewInfoHora}>
                   <View>
                     <Text style={estilos.texto} variant="titleMedium">
-                      Entrada:
+                     1º Registro - Entrada:
                     </Text>
                     <Text style={estilos.texto} variant="titleMedium">
                       Intervalo:
@@ -303,9 +323,12 @@ export default function Home({ navigation }) {
                     <Text>{saida}</Text>
                   </View>
                 </View>
+                  
+
               </Card.Content>
             </Card>
           </View>
+        
           <View>
             <Button style={estilos.viewBotao} onPress={marcarPonto}>
               <Circle m="$2" w="$5" h="$5" color="white" />
@@ -331,16 +354,16 @@ export default function Home({ navigation }) {
               <ActionsheetContent
                 h="$72"
                 zIndex={999}
-                backgroundColor="#207FDE"
+                backgroundColor="white"
               >
                 <ActionsheetDragIndicatorWrapper>
                   <ActionsheetDragIndicator />
                 </ActionsheetDragIndicatorWrapper>
-                <Text style={estilos.cardTitulo}>Banco de Horas</Text>
+                <Text style={estilos.bancoTitulo}>Banco de Horas</Text>
 
                 <ActionsheetItem>
                   <ActionsheetItemText style={estilos.cardTexto}>
-                    Início do banco:
+                    Horas trabalhadas
                   </ActionsheetItemText>
                 </ActionsheetItem>
                 <ActionsheetItem>
@@ -365,13 +388,18 @@ const estilos = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 10,
-    marginRight: 10,
-    padding: 10,
+  },
+  viewMenu: {
+    padding: 20,
+    backgroundColor: "#ef7135"
   },
   menuTexto: {
     fontSize: 18,
-    fontWeight: "bold",
+
+    color: "white",
+  },
+  textoMenu:{
+    color: "white"
   },
   menuAvatar: {
     marginTop: 60,
@@ -402,16 +430,16 @@ const estilos = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
-    borderRadius: 40,
+    
+    backgroundColor: "#ef7135"
   },
   viewRelatorio: {
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
-    borderRadius: 40,
     backgroundColor: "rgba(0, 0, 0, 0)",
-    borderColor: "#217dde",
+    borderColor: "#ef7135",
     borderWidth: 1,
   },
   viewCard: {
@@ -419,17 +447,33 @@ const estilos = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "6%",
+    
   },
   cardColor: {
     backgroundColor: "#f2f9ff",
   },
-  cardTexto: { color: "white" },
+  cardTexto: { color: "black", marginBottom: 6 },
   cardTitulo: {
-    color: "white",
+    color: "#ef7135",
+    fontSize: 15,
+    fontWeight: "bold",
+    justifyContent: "space-between",
+    marginBottom: 12,
+    backgroundColor: "#FFC4BE",
+    alignItems: "center",
+    textAlign: "center"
+  },
+  bancoTitulo: {
+    color: "#ef7135",
     fontSize: 18,
     fontWeight: "bold",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     marginBottom: 12,
+    alignItems: "center",
+    textAlign: "center"
+  },
+  viewHeader:{
+    justifyContent: "space-between",
   },
   cardIcon: { flexDirection: "row" },
   viewInfo: {
@@ -441,18 +485,20 @@ const estilos = StyleSheet.create({
   },
   texto: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
   },
 
   cardInfo: {
-    backgroundColor: "#207FDE",
-    textDecorationColor: "white",
-    color: "white",
+    textDecorationColor: "black",
+    color: "black",
+    marginVertical: 40,
+    marginBottom: 90,
   },
   cardConteudo: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+
   },
   cardInfoText: {
     textAlign: "center",
