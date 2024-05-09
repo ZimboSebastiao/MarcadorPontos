@@ -59,10 +59,15 @@ export default function Login({ navigation }) {
 
   const recuperarSenha = async () => {
     try {
+      if (!email) {
+        Alert.alert("Atenção!", "Digite seu e-mail para recuperar a senha.");
+        return;
+      }
+  
       await sendPasswordResetEmail(auth, email);
       Alert.alert("Recuperar senha", "Verifique sua caixa de e-mails.");
     } catch (error) {
-      console.error("error:", error); // Adicione este log
+      console.error("error:", error);
     }
   };
 
@@ -88,7 +93,7 @@ export default function Login({ navigation }) {
             </Pressable>
 
             <Pressable style={estilos.botoes} onPress={login}>
-              <Text style={estilos.textoBotao}>Conectar</Text>
+              <Text style={estilos.textoBotao}>Entrar</Text>
             </Pressable>
           </View>
           <View>
