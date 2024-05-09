@@ -102,11 +102,11 @@ export default function Home({ navigation }) {
         postalCode,
         isoCountryCode,
       } = enderecoInfo;
-      const numero = streetNumber ? streetNumber : "número desconhecido";
+      const numero = streetNumber ? streetNumber : "";
       const cep = postalCode ? postalCode : "CEP desconhecido";
       const estado = region ? region : "estado desconhecido";
       let cidade = city ? city : district ? district : "cidade desconhecida";
-      enderecoFormatado = `${street || name}, ${numero} - ${cidade} - ${estado} - CEP: ${cep}`;
+      enderecoFormatado = `${street || name}, ${numero} ${cidade} - ${estado} - CEP: ${cep}`;
     }
       setEndereco(enderecoFormatado);
     }
@@ -348,7 +348,7 @@ export default function Home({ navigation }) {
                   
                   />
               <View style={{justifyContent: "space-between", alignItems: "flex-start", padding: 6, margin: 6,}}> 
-              <Text style={{ color: "#DEDEBF", fontSize: 13, marginBottom: 10}}>Você está na</Text>
+              <Text style={{ color: "#DEDEBF", fontSize: 13, marginBottom: 10}}>Localização atual</Text>
              
                 <Text style={estilos.textoMenu}>{endereco}</Text>
                 
@@ -434,7 +434,7 @@ export default function Home({ navigation }) {
         
           <View>
             <Button style={estilos.viewBotao} onPress={marcarPonto}>
-              <Circle m="$2" w="$5" h="$5" color="white" />
+              <Circle m="$2" size={19} color="white" />
               <ButtonText> Marcar Ponto </ButtonText>
             </Button>
           </View>
@@ -466,12 +466,12 @@ export default function Home({ navigation }) {
 
                 <ActionsheetItem>
                   <ActionsheetItemText style={estilos.cardTexto}>
-                    Horas trabalhadas
+                    Horas trabalhadas hoje
                   </ActionsheetItemText>
                 </ActionsheetItem>
                 <ActionsheetItem>
                   <ActionsheetItemText style={estilos.cardTexto}>
-                    Saldo consolidado:
+                    Saldo consolidado
                   </ActionsheetItemText>
                 </ActionsheetItem>
               </ActionsheetContent>
@@ -555,8 +555,18 @@ const estilos = StyleSheet.create({
   cardColor: {
     backgroundColor: "#f2f9ff",
   },
-  cardTexto: { color: "black", marginBottom: 10, fontWeight: "bold" },
-  cardHora: { color: "#ef7135", marginBottom: 10, fontWeight: "bold" },
+  cardTexto: { 
+    color: "#6F6F6F", 
+    marginBottom: 10, 
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  cardHora: 
+  { 
+    color: "#ef7135", 
+    marginBottom: 10, 
+    fontWeight: "bold" 
+  },
   cardTitulo: {
     color: "#ef7135",
     fontSize: 17,
