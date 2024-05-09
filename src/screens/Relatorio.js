@@ -102,7 +102,7 @@ export default function Relatorio({ navigation }) {
             <Text style={estilos.menuTexto}>Relatório</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
               <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
-              <AvatarImage source={{ uri: image }} alt="Foto do perfil" />
+              <AvatarImage source={image ? { uri: image } : null} alt="Foto do perfil" />
             </Avatar>
           </View>
 

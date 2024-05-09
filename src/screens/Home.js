@@ -301,16 +301,15 @@ export default function Home({ navigation }) {
               <Avatar bgColor="$amber600" size="md" borderRadius="$full">
                 <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
                 <AvatarImage source={image ? { uri: image } : null} alt="Foto do perfil" />
-
               </Avatar>
             </View>
 
             <View>
               <Text> Você está próximo a</Text>
-
               <Text style={estilos.textoMenu}> 
                 <MapPin 
                 color="white"
+                size={16}
                 />
                 Avenida prof joão batista conti, 597
               </Text>
@@ -443,12 +442,12 @@ const estilos = StyleSheet.create({
     backgroundColor: "#ef7135"
   },
   menuTexto: {
-    fontSize: 18,
-
+    fontSize: 14,
     color: "white",
   },
   textoMenu:{
-    color: "white"
+    color: "white",
+    fontSize: 14
   },
   menuAvatar: {
     marginTop: 60,
