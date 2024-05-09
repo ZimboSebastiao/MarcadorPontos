@@ -12,10 +12,6 @@ export default function Inicial({ navigation }) {
         <Text style={estilos.subtitulo}>
           Seu Assistente de Horas Trabalhadas
         </Text>
-        <Text style={estilos.intro}>
-          Com uma interface intuitiva e fácil de usar, o Ponto Fácil permite que
-          você registre suas horas de trabalho com apenas alguns toques.
-        </Text>
       </View>
 
       <View style={estilos.formulario}>
