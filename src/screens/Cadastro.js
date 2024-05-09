@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-import backgroundImage from "../../assets/images/login.png";
+import backgroundImage from "./../../assets/images/login.png";
 import { Image } from "react-native";
 
 export default function Cadastro({ navigation }) {
@@ -101,6 +101,11 @@ export default function Cadastro({ navigation }) {
               <Text style={estilos.textoBotao}>Cadastrar</Text>
             </Pressable>
           </View>
+          <View>
+            <Pressable style={estilos.botaoRecuperar} onPress={() => navigation.navigate("Login")}>
+              <Text>Já possui conta?<Text  style={estilos.textoBotaoLogin}> Faça o login!</Text></Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </>
@@ -117,10 +122,10 @@ const estilos = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     width: "auto",
-    height: "35%",
+    height: "40%",
   },
   formulario: {
-    marginVertical: 30,
+    marginVertical: 70,
     padding: 10,
 
     width: "90%",
@@ -130,7 +135,7 @@ const estilos = StyleSheet.create({
   input: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#207FDE",
+    borderColor: "#ef7135",
     borderRadius: 40,
     marginVertical: 10,
     height: 47,
@@ -138,15 +143,14 @@ const estilos = StyleSheet.create({
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#207FDE",
+    borderColor: "#ef7135",
     borderRadius: 40,
     marginVertical: 20,
-    backgroundColor: "#207FDE",
+    backgroundColor: "#ef7135",
     alignItems: "center",
   },
   botaoRecuperar: {
     padding: 0,
-    marginVertical: 4,
     alignItems: "flex-end",
   },
   textoBotao: {
@@ -154,10 +158,10 @@ const estilos = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
-
-  textoBotaoRecuperar: {
+  textoBotaoLogin: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "grey",
+    color: "blue",
   },
+  
 });
