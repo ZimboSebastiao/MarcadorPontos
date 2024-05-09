@@ -42,6 +42,7 @@ export default function Home({ navigation }) {
   const [intervalo, setIntervalo] = useState("");
   const [fimIntervalo, setFimIntervalo] = useState("");
   const [saida, setSaida] = useState("");
+  const [endereco, setEndereco] = useState("");
 
   // console.log(auth.currentUser);
 
@@ -51,15 +52,16 @@ export default function Home({ navigation }) {
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(!showActionsheet);
 
+
   useEffect(() => {
     async function obterLocalizacao() {
       const { status } = await Location.requestForegroundPermissionsAsync();
-
+  
       if (status !== "granted") {
         Alert.alert("Ops!", "Você não autorizou o uso de geolocalização");
         return;
       }
-
+  
       const { status: statusCalendario } =
         await Calendar.requestCalendarPermissionsAsync();
       if (statusCalendario === "granted") {
@@ -67,7 +69,7 @@ export default function Home({ navigation }) {
           Calendar.EntityTypes.EVENT
         );
       }
-
+  
       let localizacaoAtual = await Location.getCurrentPositionAsync({});
       setMinhaLocalizacao(localizacaoAtual);
       setLocalizacao({
@@ -76,11 +78,43 @@ export default function Home({ navigation }) {
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       });
+  
+      // Converter coordenadas em endereço
+      const enderecoReverso = await Location.reverseGeocodeAsync({
+        latitude: localizacaoAtual.coords.latitude,
+        longitude: localizacaoAtual.coords.longitude,
+      });
+  
+      // Verificar a estrutura do objeto de endereço retornado
+      console.log(enderecoReverso);
+  
+       // Construir o endereço a partir das informações retornadas
+    let enderecoFormatado = "";
+    if (enderecoReverso && enderecoReverso.length > 0) {
+      const enderecoInfo = enderecoReverso[0];
+      const {
+        street,
+        name,
+        streetNumber,
+        city,
+        district,
+        region,
+        postalCode,
+        isoCountryCode,
+      } = enderecoInfo;
+      const numero = streetNumber ? streetNumber : "número desconhecido";
+      const cep = postalCode ? postalCode : "CEP desconhecido";
+      const estado = region ? region : "estado desconhecido";
+      let cidade = city ? city : district ? district : "cidade desconhecida";
+      enderecoFormatado = `${street || name}, ${numero} - ${cidade} - ${estado} - CEP: ${cep}`;
+    }
+      setEndereco(enderecoFormatado);
     }
     obterLocalizacao();
   }, []);
+  
 
-  // console.log(minhaLocalizacao);
+  console.log(endereco);
 
   const [localizacao, setLocalizacao] = useState(null);
 
@@ -311,7 +345,7 @@ export default function Home({ navigation }) {
                 color="white"
                 size={16}
                 />
-                Avenida prof joão batista conti, 597
+                {endereco}
               </Text>
 
             </View>
