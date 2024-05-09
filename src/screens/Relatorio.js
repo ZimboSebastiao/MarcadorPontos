@@ -216,9 +216,11 @@ const estilos = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginRight: 10,
-    padding: 10,
+    padding: 20,
     width: "100%", 
     backgroundColor: "#ef7135",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   menuTexto: {
     fontSize: 18,

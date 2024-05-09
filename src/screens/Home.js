@@ -494,7 +494,9 @@ const estilos = StyleSheet.create({
   },
   viewMenu: {
     padding: 20,
-    backgroundColor: "#ef7135"
+    backgroundColor: "#ef7135",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   menuTexto: {
     fontSize: 14,
