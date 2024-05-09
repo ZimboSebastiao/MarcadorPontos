@@ -338,15 +338,21 @@ export default function Home({ navigation }) {
               </Avatar>
             </View>
 
-            <View>
-              <Text> Você está próximo a</Text>
-              <Text style={estilos.textoMenu}> 
-                <MapPin 
+            <View style={{flexDirection: "row", alignItems: "center", marginTop: 20}}>
+
+            <MapPin 
                 color="white"
                 size={16}
+                padding="20"
+                style={{ marginTop: 23}}
+                
                 />
-                {endereco}
-              </Text>
+              <View style={{justifyContent: "space-between", alignItems: "flex-start", padding: 6, margin: 6,}}> 
+              <Text style={{ color: "#DEDEBF", fontSize: 13, marginBottom: 10}}>Você está na</Text>
+             
+                <Text style={estilos.textoMenu}>{endereco}</Text>
+                
+              </View>
 
             </View>
           </View>
@@ -481,7 +487,7 @@ const estilos = StyleSheet.create({
   },
   textoMenu:{
     color: "white",
-    fontSize: 14
+    fontSize: 12,
   },
   menuAvatar: {
     marginTop: 60,
