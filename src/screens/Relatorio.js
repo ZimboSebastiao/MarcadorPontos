@@ -66,11 +66,6 @@ export default function Relatorio({ navigation }) {
     
   };
   
-  
-  
-  
- 
-  
   useEffect(() => {
     const loadProfileImageUri = async () => {
       try {
@@ -107,6 +102,7 @@ export default function Relatorio({ navigation }) {
             <Text style={estilos.menuTexto}>Relatório</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
               <AvatarFallbackText>{nome || "Visitante"}</AvatarFallbackText>
+              <AvatarImage source={{ uri: image }} alt="Foto do perfil" />
             </Avatar>
           </View>
 
