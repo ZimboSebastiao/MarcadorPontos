@@ -1,11 +1,11 @@
-import { Button, StyleSheet, Text, View, Pressable } from "react-native";
+import { Button, StyleSheet, Text, View, Pressable, ScrollView } from "react-native";
 
 import backgroundImage from "../../assets/images/inicio.png";
 import { Image } from "react-native";
 
 export default function Inicial({ navigation }) {
   return (
-    <View style={estilos.container}>
+    <View  style={estilos.container}>
       <Image source={backgroundImage} style={{ ...estilos.background }} />
       <View style={estilos.introducao}>
         <Text style={estilos.titulo}>PontoFácil</Text>
@@ -43,18 +43,20 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     width: "auto",
     height: "50%",
+
+
   },
   formulario: {
-    marginVertical: 30,
+    marginVertical: "30%",
     padding: 10,
   },
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#207FDE",
+    borderColor: "#ef7135",
     borderRadius: 40,
     marginVertical: 5,
-    backgroundColor: "#207FDE",
+    backgroundColor: "#ef7135",
     alignItems: "center",
   },
   botaoRecuperar: {
@@ -63,7 +65,7 @@ const estilos = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 40,
     alignItems: "center",
-    borderColor: "#207FDE",
+    borderColor: "#ef7135",
   },
   textoBotao: {
     fontSize: 16,
@@ -78,17 +80,16 @@ const estilos = StyleSheet.create({
   titulo: {
     fontSize: 18,
     fontWeight: "bold",
+   
+    color: "#ef7135",
   },
   subtitulo: {
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: "bold",
     alignItems: "flex-start",
     textAlign: "right",
-    marginBottom: 6,
-  },
-  intro: {
-    color: "grey",
-    fontWeight: "500",
     fontStyle: "italic",
+   
   },
+
 });
