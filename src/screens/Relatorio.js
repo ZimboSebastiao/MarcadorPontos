@@ -97,7 +97,7 @@ export default function Relatorio({ navigation }) {
               m="$3"
               w="$10"
               h="$6"
-              color="black"
+              color="white"
             />
             <Text style={estilos.menuTexto}>Relatório</Text>
             <Avatar bgColor="$amber600" size="md" borderRadius="$full">
@@ -125,7 +125,7 @@ export default function Relatorio({ navigation }) {
                   </Avatar>
                 </TouchableOpacity>
                 <VStack>
-                  <Heading size="sm">{nome || "Visitante"}</Heading>
+                  <Heading style={{color: "#ef7135"}} size="sm">{nome || "Visitante"}</Heading>
                   <Text size="sm">Developer</Text>
                 </VStack>
               </HStack>
@@ -134,8 +134,8 @@ export default function Relatorio({ navigation }) {
 
           <View style={estilos.selecaoEspaco}>
             <Select style={estilos.selecao}>
-              <SelectTrigger variant="rounded" size="sm" borderColor="blue">
-                <SelectInput placeholder="Seleciona um Período" />
+              <SelectTrigger variant="rounded" size="sm" borderColor="#ef7135">
+                <SelectInput placeholder="Selecione um Período" />
                 <SelectIcon mr="$3">
                   <Icon as={ChevronDownIcon} />
                 </SelectIcon>
@@ -172,7 +172,7 @@ export default function Relatorio({ navigation }) {
                       Horas em pausa:
                     </Text>
                     <Text style={estilos.texto} variant="titleMedium">
-                      Média de oras em pausa:
+                      Média de horas em pausa:
                     </Text>
                   </View>
 
@@ -191,13 +191,13 @@ export default function Relatorio({ navigation }) {
           <View style={estilos.viewPeriodo}>
             <View>
               <Button style={estilos.viewPeriodoBotao} $_text-color="black">
-                <ButtonText>Dia</ButtonText>
+                <ButtonText style={{color: "white"}}>Dia</ButtonText>
               </Button>
             </View>
 
             <View>
               <Button style={estilos.viewPeriodoBotao} $_text-color="black">
-                <ButtonText>Jornada</ButtonText>
+                <ButtonText style={{color: "white"}}>Jornada</ButtonText>
               </Button>
             </View>
           </View>
@@ -215,31 +215,27 @@ const estilos = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 10,
     marginRight: 10,
     padding: 10,
+    width: "100%", 
+    backgroundColor: "#ef7135",
   },
   menuTexto: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "white",
   },
-  menuAvatar: {
-    marginTop: 60,
-  },
-  menuNaveg: {
-    alignItems: "flex-start",
-  },
+
 
   imagem: {
     justifyContent: "center",
     alignItems: "center",
-
     marginTop: 20,
   },
   selecao: {
     justifyContent: "center",
     width: "85%",
-    borderColor: "blue",
+    borderColor: "#ef7135",
     marginBottom: 30,
   },
   selecaoEspaco: {
@@ -274,11 +270,10 @@ const estilos = StyleSheet.create({
   },
   viewPeriodoBotao: {
     width: "84%",
-
     marginBottom: "6%",
     borderRadius: 40,
-    backgroundColor: "rgba(0, 0, 0, 0)",
-    borderColor: "#217dde",
+    backgroundColor: "#ef7135",
+    borderColor: "#ef7135",
     borderWidth: 1,
   },
 });
