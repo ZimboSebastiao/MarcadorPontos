@@ -84,11 +84,16 @@ export default function Login({ navigation }) {
           />
           <View>
             <Pressable style={estilos.botaoRecuperar} onPress={recuperarSenha}>
-              <Text style={estilos.textoBotaoRecuperar}>Esqueceu a senha?</Text>
+              <Text style={estilos.textoBotaoRecuperar}>Recuperar a senha</Text>
             </Pressable>
 
             <Pressable style={estilos.botoes} onPress={login}>
               <Text style={estilos.textoBotao}>Conectar</Text>
+            </Pressable>
+          </View>
+          <View>
+            <Pressable style={estilos.botaoRecuperar} onPress={() => navigation.navigate("Cadastro")}>
+              <Text>Não possui conta?<Text  style={estilos.textoBotaoLogin}> Faça o seu Cadastro!</Text></Text>
             </Pressable>
           </View>
         </View>
@@ -116,17 +121,17 @@ const estilos = StyleSheet.create({
   input: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#207FDE",
-    borderRadius: 40,
+    borderColor: "#ef7135",
+    borderRadius: 10,
     marginVertical: 20,
   },
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#207FDE",
-    borderRadius: 40,
+    borderColor: "#ef7135",
+    borderRadius: 10,
     marginVertical: 20,
-    backgroundColor: "#207FDE",
+    backgroundColor: "#ef7135",
     alignItems: "center",
   },
   botaoRecuperar: {
@@ -144,5 +149,10 @@ const estilos = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     color: "grey",
+  },
+  textoBotaoLogin: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#207FDE",
   },
 });

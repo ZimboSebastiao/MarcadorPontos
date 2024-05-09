@@ -103,7 +103,7 @@ export default function Cadastro({ navigation }) {
           </View>
           <View>
             <Pressable style={estilos.botaoRecuperar} onPress={() => navigation.navigate("Login")}>
-              <Text>Já possui conta?<Text  style={estilos.textoBotaoLogin}> Faça o login!</Text></Text>
+              <Text>Já possui conta?<Text  style={estilos.textoBotaoLogin}> Faça o Login!</Text></Text>
             </Pressable>
           </View>
         </View>
@@ -136,7 +136,7 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     borderColor: "#ef7135",
-    borderRadius: 40,
+    borderRadius: 10,
     marginVertical: 10,
     height: 47,
   },
@@ -144,7 +144,7 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     borderColor: "#ef7135",
-    borderRadius: 40,
+    borderRadius: 10,
     marginVertical: 20,
     backgroundColor: "#ef7135",
     alignItems: "center",
@@ -161,7 +161,7 @@ const estilos = StyleSheet.create({
   textoBotaoLogin: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "blue",
+    color: "#207FDE",
   },
   
 });

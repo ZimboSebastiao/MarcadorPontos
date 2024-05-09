@@ -54,7 +54,7 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     borderColor: "#ef7135",
-    borderRadius: 40,
+    borderRadius: 10,
     marginVertical: 5,
     backgroundColor: "#ef7135",
     alignItems: "center",
@@ -63,7 +63,7 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     marginVertical: 10,
-    borderRadius: 40,
+    borderRadius: 10,
     alignItems: "center",
     borderColor: "#ef7135",
   },
@@ -80,7 +80,6 @@ const estilos = StyleSheet.create({
   titulo: {
     fontSize: 18,
     fontWeight: "bold",
-   
     color: "#ef7135",
   },
   subtitulo: {
@@ -89,6 +88,7 @@ const estilos = StyleSheet.create({
     alignItems: "flex-start",
     textAlign: "right",
     fontStyle: "italic",
+    color: "grey"
    
   },
 
