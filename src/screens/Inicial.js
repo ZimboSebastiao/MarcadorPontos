@@ -42,7 +42,7 @@ const estilos = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     width: "auto",
-    height: "50%",
+    height: "40%",
 
 
   },
