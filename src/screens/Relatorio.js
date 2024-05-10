@@ -125,7 +125,7 @@ export default function Relatorio({ navigation }) {
                   </Avatar>
                 </TouchableOpacity>
                 <VStack>
-                  <Heading style={{color: "#ef7135"}} size="sm">{nome || "Visitante"}</Heading>
+                  <Heading style={{color: "#ff7938"}} size="sm">{nome || "Visitante"}</Heading>
                   <Text size="sm">Developer</Text>
                 </VStack>
               </HStack>
@@ -134,7 +134,7 @@ export default function Relatorio({ navigation }) {
 
           <View style={estilos.selecaoEspaco}>
             <Select style={estilos.selecao}>
-              <SelectTrigger variant="rounded" size="sm" borderColor="#ef7135">
+              <SelectTrigger variant="rounded" size="sm" borderColor="#ff7938">
                 <SelectInput placeholder="Selecione um Período" />
                 <SelectIcon mr="$3">
                   <Icon as={ChevronDownIcon} />
@@ -218,7 +218,7 @@ const estilos = StyleSheet.create({
     marginRight: 10,
     padding: 20,
     width: "100%", 
-    backgroundColor: "#ef7135",
+    backgroundColor: "#ff7938",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -237,7 +237,7 @@ const estilos = StyleSheet.create({
   selecao: {
     justifyContent: "center",
     width: "85%",
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
     marginBottom: 30,
   },
   selecaoEspaco: {
@@ -274,8 +274,8 @@ const estilos = StyleSheet.create({
     width: "84%",
     marginBottom: "6%",
     borderRadius: 40,
-    backgroundColor: "#ef7135",
-    borderColor: "#ef7135",
+    backgroundColor: "#ff7938",
+    borderColor: "#ff7938",
     borderWidth: 1,
   },
 });

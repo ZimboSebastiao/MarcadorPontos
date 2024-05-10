@@ -53,10 +53,10 @@ const estilos = StyleSheet.create({
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
     borderRadius: 10,
     marginVertical: 5,
-    backgroundColor: "#ef7135",
+    backgroundColor: "#ff7938",
     alignItems: "center",
   },
   botaoRecuperar: {
@@ -65,7 +65,7 @@ const estilos = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 10,
     alignItems: "center",
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
   },
   textoBotao: {
     fontSize: 16,
@@ -80,7 +80,7 @@ const estilos = StyleSheet.create({
   titulo: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ef7135",
+    color: "#ff7938",
   },
   subtitulo: {
     fontSize: 14,

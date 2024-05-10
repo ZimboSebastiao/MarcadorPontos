@@ -135,7 +135,7 @@ const estilos = StyleSheet.create({
   input: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
     borderRadius: 10,
     marginVertical: 10,
     height: 47,
@@ -143,10 +143,10 @@ const estilos = StyleSheet.create({
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
     borderRadius: 10,
     marginVertical: 20,
-    backgroundColor: "#ef7135",
+    backgroundColor: "#ff7938",
     alignItems: "center",
   },
   botaoRecuperar: {

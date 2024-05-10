@@ -371,7 +371,7 @@ export default function Home({ navigation }) {
                     <Text style={estilos.cardTexto} variant="titleMedium">{dataAtualizada}</Text>
                   </View>
                   <View style={estilos.cardIcon}>
-                    <Icon as={ClockIcon} color="#ef7135" m="$0"  h="$6"  />
+                    <Icon as={ClockIcon} color="#ff7938" m="$0"  h="$6"  />
                     <Text style={estilos.cardHora} variant="titleMedium"> {hora}</Text>
                   </View>
                 </View>
@@ -494,7 +494,7 @@ const estilos = StyleSheet.create({
   },
   viewMenu: {
     padding: 20,
-    backgroundColor: "#ef7135",
+    backgroundColor: "#ff7938",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -536,7 +536,7 @@ const estilos = StyleSheet.create({
     marginRight: "auto",
     marginBottom: "6%",
     
-    backgroundColor: "#ef7135"
+    backgroundColor: "#ff7938"
   },
   viewRelatorio: {
     width: "90%",
@@ -544,7 +544,7 @@ const estilos = StyleSheet.create({
     marginRight: "auto",
     marginBottom: "6%",
     backgroundColor: "rgba(0, 0, 0, 0)",
-    borderColor: "#ef7135",
+    borderColor: "#ff7938",
     borderWidth: 1,
   },
   viewCard: {
@@ -565,22 +565,22 @@ const estilos = StyleSheet.create({
   },
   cardHora: 
   { 
-    color: "#ef7135", 
+    color: "#ff7938", 
     marginBottom: 10, 
     fontWeight: "bold" 
   },
   cardTitulo: {
-    color: "#ef7135",
+    color: "#ff7938",
     fontSize: 17,
     fontWeight: "bold",
     justifyContent: "space-between",
     marginBottom: 12,
-    backgroundColor: "#fde7dc",
+    backgroundColor: "#ffe9dd",
     alignItems: "center",
     paddingLeft: 20
   },
   bancoTitulo: {
-    color: "#ef7135",
+    color: "#ff7938",
     fontSize: 18,
     fontWeight: "bold",
     justifyContent: "space-between",
