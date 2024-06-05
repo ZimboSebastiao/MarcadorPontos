@@ -8,7 +8,8 @@ import { Card, Divider} from "react-native-paper";
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { auth } from "../../firebase.config";
+import { auth, database} from "../../firebase.config";
+import { ref, push, serverTimestamp } from "firebase/database";
 
 import {
   GluestackUIProvider,
@@ -125,18 +126,45 @@ export default function Home({ navigation }) {
     longitudeDelta: 40,
   };
 
-  const marcarPonto = () => {
+  const marcarPonto = async () => {
     const agora = new Date();
     const horas = String(agora.getHours()).padStart(2, "0");
     const minutos = String(agora.getMinutes()).padStart(2, "0");
     const horaAtual = `${horas}:${minutos}`;
-
+  
+    let tipoRegistro = "";
+    if (!dataFormatada) {
+      tipoRegistro = "Entrada";
+    } else if (!intervalo) {
+      tipoRegistro = "Intervalo";
+    } else if (!fimIntervalo) {
+      tipoRegistro = "Fim do Intervalo";
+    } else {
+      tipoRegistro = "Saída";
+    }
+  
+    // Envia o registro para o Firebase
+    try {
+      const newRegistroRef = await push(ref(database, `registros/${auth.currentUser.uid}`), {
+        tipo: tipoRegistro,
+        hora: horaAtual,
+        data: firebase.database.ServerValue.TIMESTAMP,
+      });
+  
+    } catch (error) {
+      console.error("Erro ao enviar o registro para o Firebase:", error);
+      return;
+    }
+    // Obtém a chave do novo registro
+    const registroKey = newRegistroRef.key;
+  
+    // Atualiza o estado conforme necessário
     if (!dataFormatada) {
       const dia = String(agora.getDate()).padStart(2, "0");
       const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
       const ano = agora.getFullYear();
       const data = `${dia}/${mes}/${ano}`;
-
+  
       Alert.alert(
         "Registro",
         `Ponto de entrada marcado com sucesso: ${horaAtual} - ${data}`,
@@ -164,7 +192,7 @@ export default function Home({ navigation }) {
             const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
             const ano = agora.getFullYear();
             const data = `${dia}/${mes}/${ano}`;
-
+  
             Alert.alert(
               "Registro",
               `Intervalo marcado com sucesso: ${horaAtual} - ${data}`,
@@ -195,7 +223,7 @@ export default function Home({ navigation }) {
               const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
               const ano = agora.getFullYear();
               const data = `${dia}/${mes}/${ano}`;
-
+  
               Alert.alert(
                 "Registro",
                 `Fim do intervalo marcado com sucesso: ${horaAtual} - ${data}`,
@@ -224,7 +252,7 @@ export default function Home({ navigation }) {
             const mes = String(agora.getMonth() + 1).padStart(2, "0"); // Janeiro é 0!
             const ano = agora.getFullYear();
             const data = `${dia}/${mes}/${ano}`;
-
+  
             Alert.alert(
               "Registro",
               `Saída marcada com sucesso: ${horaAtual} - ${data}`,
@@ -240,6 +268,7 @@ export default function Home({ navigation }) {
       ]);
     }
   };
+  
 
   const atualizarHora = () => {
     const agora = new Date();

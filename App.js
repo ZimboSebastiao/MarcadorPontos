@@ -21,7 +21,6 @@ import Sobre from "./src/screens/Sobre";
 import Relatorio from "./src/screens/Relatorio";
 import Configuracoes from "./src/screens/Configuracoes";
 
-import Inicial from "./src/screens/Inicial";
 import Cadastro from "./src/screens/Cadastro";
 import Login from "./src/screens/Login";
 import Logout from "./src/components/Logout";
@@ -55,7 +54,7 @@ export default function App() {
       <StatusBar barStyle="light-content" />
       <NavigationContainer>
         <Drawer.Navigator
-          initialRouteName="Inicial"
+          initialRouteName="Home"
           screenOptions={{
             headerStyle: { backgroundColor: "#1D1D1D" },
             headerTintColor: "white",
@@ -117,11 +116,6 @@ export default function App() {
             </>
           ) : (
             <>
-              <Drawer.Screen
-                name="Inicial"
-                component={Inicial}
-                options={{ headerShown: false }}
-              />
               <Drawer.Screen
                 name="Login"
                 component={Login}

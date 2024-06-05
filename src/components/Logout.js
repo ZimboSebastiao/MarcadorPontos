@@ -8,7 +8,7 @@ function Logout({ navigation }) {
     const logout = async () => {
       try {
         await signOut(auth);
-        navigation.navigate("Inicial");
+        navigation.navigate("Login");
       } catch (error) {
         console.error(error);
       }
