@@ -11,7 +11,7 @@ import backgroundImage from "../../assets/images/signin.png";
 import { Image } from "react-native";
 
 // Importando os recursos de autenticação
-import { auth } from "../../firebase.config";
+// import { auth } from "../../firebase.config";
 // console.log("auth:", auth);
 
 import {

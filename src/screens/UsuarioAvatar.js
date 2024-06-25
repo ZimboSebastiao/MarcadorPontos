@@ -12,7 +12,7 @@ import {
 import { config } from "@gluestack-ui/config";
 import { useRef, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { auth } from "../../firebase.config";
+// import { auth } from "../../firebase.config";
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

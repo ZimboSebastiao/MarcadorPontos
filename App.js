@@ -5,7 +5,7 @@ import {
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 
 import {
@@ -21,8 +21,6 @@ import Sobre from "./src/screens/Sobre";
 import Relatorio from "./src/screens/Relatorio";
 import Configuracoes from "./src/screens/Configuracoes";
 
-import Inicial from "./src/screens/Inicial";
-import Cadastro from "./src/screens/Cadastro";
 import Login from "./src/screens/Login";
 import Logout from "./src/components/Logout";
 import UsuarioAvatar from "./src/screens/UsuarioAvatar";
@@ -32,15 +30,15 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUserLoggedIn(!!user);
-    });
+  // useEffect(() => {
+  //   const auth = getAuth();
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setUserLoggedIn(!!user);
+  //   });
 
-    // Limpe a inscrição quando o componente for desmontado
-    return unsubscribe;
-  }, []);
+  //   // Limpe a inscrição quando o componente for desmontado
+  //   return unsubscribe;
+  // }, []);
 
   function CustomDrawerContent(props) {
     return (
@@ -118,24 +116,13 @@ export default function App() {
           ) : (
             <>
               <Drawer.Screen
-                name="Inicial"
-                component={Inicial}
-                options={{ headerShown: false }}
-              />
-              <Drawer.Screen
                 name="Login"
                 component={Login}
                 options={{
                   headerShown: false,
                 }}
               />
-              <Drawer.Screen
-                name="Cadastro"
-                component={Cadastro}
-                options={{
-                  headerShown: false,
-                }}
-              />
+              
             </>
           )}
         </Drawer.Navigator>

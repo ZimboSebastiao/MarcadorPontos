@@ -8,7 +8,7 @@ import { Card, Divider} from "react-native-paper";
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { auth } from "../../firebase.config";
+// import { auth } from "../../firebase.config";
 
 import {
   GluestackUIProvider,

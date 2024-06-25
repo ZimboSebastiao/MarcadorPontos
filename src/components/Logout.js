@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { auth } from "../../firebase.config";
-import { signOut } from "firebase/auth";
+// import { auth } from "../../firebase.config";
+// import { signOut } from "firebase/auth";
 
 function Logout({ navigation }) {
   useEffect(() => {

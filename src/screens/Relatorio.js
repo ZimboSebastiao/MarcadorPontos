@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
-import { auth } from "../../firebase.config";
+// import { auth } from "../../firebase.config";
 
 import {
   GluestackUIProvider,
