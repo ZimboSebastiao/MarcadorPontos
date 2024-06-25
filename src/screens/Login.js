@@ -7,7 +7,7 @@ import {
   View,
   Text,
 } from "react-native";
-import backgroundImage from "../../assets/images/signin.png";
+import backgroundImage from "../../assets/images/ponto.png";
 import { Image } from "react-native";
 
 // Importando os recursos de autenticação
@@ -74,11 +74,11 @@ export default function Login({ navigation }) {
   return (
     <>
       <View style={estilos.container}>
-        <Image source={backgroundImage} style={{ ...estilos.background }} />
+      <Image source={backgroundImage} style={{ ...estilos.background }} />
         <View style={estilos.formulario}>
           <TextInput
             onChangeText={(valor) => setEmail(valor)}
-            placeholder="E-mail"
+            placeholder="Nº de Utilizador"
             style={estilos.input}
           />
           <TextInput
@@ -89,18 +89,14 @@ export default function Login({ navigation }) {
           />
           <View>
             <Pressable style={estilos.botaoRecuperar} onPress={recuperarSenha}>
-              <Text style={estilos.textoBotaoRecuperar}>Recuperar a senha</Text>
+              <Text style={estilos.textoBotaoRecuperar}></Text>
             </Pressable>
 
             <Pressable style={estilos.botoes} onPress={login}>
               <Text style={estilos.textoBotao}>Entrar</Text>
             </Pressable>
           </View>
-          <View>
-            <Pressable style={estilos.botaoRecuperar} onPress={() => navigation.navigate("Cadastro")}>
-              <Text>Não possui conta?<Text  style={estilos.textoBotaoLogin}> Faça o seu Cadastro!</Text></Text>
-            </Pressable>
-          </View>
+         
         </View>
       </View>
     </>
@@ -110,33 +106,34 @@ export default function Login({ navigation }) {
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#ff7938",
   },
   background: {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
     width: "auto",
-    height: "35%",
+    height: "20%",
   },
   formulario: {
-    marginVertical: 30,
-    padding: 10,
+    padding: 15,
+    // backgroundColor: "yellow"
   },
   input: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#ff7938",
+    borderColor: "white",
     borderRadius: 10,
     marginVertical: 20,
+    backgroundColor: "white",
   },
   botoes: {
     borderWidth: 1,
     padding: 15,
-    borderColor: "#ff7938",
+    borderColor: "white",
     borderRadius: 10,
     marginVertical: 20,
-    backgroundColor: "#ff7938",
+    backgroundColor: "white",
     alignItems: "center",
   },
   botaoRecuperar: {
@@ -145,9 +142,9 @@ const estilos = StyleSheet.create({
     alignItems: "flex-end",
   },
   textoBotao: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "bold",
-    color: "white",
+    color: "black",
   },
 
   textoBotaoRecuperar: {
